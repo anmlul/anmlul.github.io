@@ -1,377 +1,1060 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anmol Shami</title>
-    <meta name="description" content="My Portfolio."/>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/aos.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/main.css" rel="stylesheet">
-  </head>
-  <body id="top">
-    <header>
-      <div class="profile-page sidebar-collapse">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent bg-primary" color-on-scroll="400">
-          <div class="container">
-            <div class="navbar-translate"><a class="navbar-brand" href="#" rel="tooltip">Anmol's Portfolio</a>
-              <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation">
-              <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Skills</a></li>
-                <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experience</a></li>
-                <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <div class="page-content">
-      <div>
-<div class="profile-page">
-  <div class="wrapper">
-    <div class="page-header page-header-small" filter-color="green">
-      <div class="page-header-image" data-parallax="true" style="background-image: url('images/cc-bg-1.jpg');"></div>
-      <div class="container">
-        <div class="content-center">
-          <div class="cc-profile-image"><a href="#"><img src="images/anmol.jpg" alt="Image"/></a></div>
-          <div class="h2 title">Anmol Shami</div>
-          <p class="category text-white">Android Developer, Kotlin, Java, React Native</p><a class="btn btn-primary" href="cv/Anmol Shami.docx" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
-        </div>
-      </div>
-      <div class="section">
-        <div class="container">
-          <div class="button-container"><a class="btn btn-default btn-round btn-lg btn-icon" href="https://www.linkedin.com/in/anmol-shami-25a077175/" rel="tooltip" title="Follow me on Linkedin"><i class="fa fa-linkedin"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="https://www.instagram.com/anmol5543/" rel="tooltip" title="Follow me on Instagram"><i class="fa fa-instagram"></i></a></div>
-        </div>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anmol Shami — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --surface: #111110;
+    --border: #2a2a26;
+    --accent: #c8f060;
+    --accent2: #f0c060;
+    --text: #e8e8e0;
+    --muted: #888880;
+    --card: #161614;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(.23,1,.32,1), width 0.3s, height 0.3s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,8,0.92);
+    backdrop-filter: blur(12px);
+    border-color: var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: none;
+    padding: 4px;
+    position: relative; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 1px;
+    background: var(--text);
+    transition: transform 0.4s cubic-bezier(.23,1,.32,1),
+                opacity 0.3s ease,
+                width 0.3s ease,
+                background 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    background: var(--accent);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    background: var(--accent);
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(0.8rem, 1.5vw, 1.05rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    text-transform: uppercase;
+  }
+
+  .hero-desc {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 400px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    color: var(--bg);
+    background: var(--accent);
+    transition: all 0.25s;
+    cursor: none;
+  }
+  .btn:hover { background: transparent; color: var(--accent); }
+  .btn.outline { background: transparent; color: var(--text); border-color: var(--border); }
+  .btn.outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.5s forwards;
+  }
+
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+
+  .hero-visual {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .orbit-container {
+    position: relative; width: 340px; height: 340px;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-ring:nth-child(1) { width: 120px; height: 120px; border-color: var(--accent); opacity: 0.3; animation: spin 20s linear infinite; }
+  .orbit-ring:nth-child(2) { width: 220px; height: 220px; animation: spin 35s linear infinite reverse; }
+  .orbit-ring:nth-child(3) { width: 320px; height: 320px; animation: spin 50s linear infinite; }
+
+  .orbit-dot {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .orbit-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px; height: 70px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--bg);
+    box-shadow: 0 0 60px rgba(200,240,96,0.4);
+  }
+
+  .skill-tag-float {
+    position: absolute;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    white-space: nowrap;
+    animation: float 4s ease-in-out infinite;
+  }
+  .skill-tag-float:nth-child(1) { top: 10%; right: 8%; animation-delay: 0s; }
+  .skill-tag-float:nth-child(2) { top: 30%; left: 5%; animation-delay: 1s; }
+  .skill-tag-float:nth-child(3) { bottom: 25%; right: 10%; animation-delay: 2s; }
+  .skill-tag-float:nth-child(4) { bottom: 10%; left: 15%; animation-delay: 0.5s; }
+
+  .hero-stats {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2rem 3rem;
+    display: flex; gap: 3rem;
+    border-top: 1px solid var(--border);
+    background: rgba(10,10,8,0.6);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Sections */
+  section { padding: 6rem 2.5rem; position: relative; }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 1rem;
+  }
+
+  /* Experience */
+  .experience { max-width: 1100px; margin: 0 auto; }
+
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+
+  .exp-item::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+  }
+  .exp-item:hover::before { transform: scaleY(1); }
+  .exp-item:hover { background: rgba(200,240,96,0.02); }
+
+  .exp-meta {}
+  .exp-period {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .exp-location {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .exp-content {}
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-points li {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .exp-points li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.65rem;
+  }
+
+  /* Skills */
+  .skills-section { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: none;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: var(--accent);
+    opacity: 0;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    transition: opacity 0.3s;
+  }
+  .skill-card:hover::after { opacity: 0.15; }
+
+  .skill-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .skill-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .skill-card:hover .skill-pill { border-color: rgba(200,240,96,0.3); color: var(--text); }
+
+  /* Education */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .edu-card:hover { border-color: var(--accent); }
+
+  .edu-degree {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .edu-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .edu-school {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .edu-year {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .edu-badge {
+    position: absolute; top: 2rem; right: 2rem;
+    font-size: 2.5rem;
+  }
+
+  /* Contact */
+  .contact-section {
+    background: var(--surface);
+    text-align: center;
+  }
+  .contact-inner { max-width: 700px; margin: 0 auto; }
+  .contact-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .contact-big em { font-style: italic; color: var(--accent); }
+  .contact-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: none;
+  }
+  .contact-link:hover { color: var(--accent); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .footer-credit {
+    font-size: 0.62rem;
+    color: var(--border);
+    letter-spacing: 0.08em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 90;
+    background: var(--bg);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 2.5rem;
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+    clip-path: circle(0% at calc(100% - 44px) 44px);
+    transition: clip-path 0.6s cubic-bezier(.77,0,.18,1),
+                opacity 0.3s ease;
+  }
+  .mobile-menu::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(200,240,96,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .mobile-menu.open {
+    pointer-events: all;
+    opacity: 1;
+    clip-path: circle(150% at calc(100% - 44px) 44px);
+  }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+    opacity: 0;
+    transform: translateY(20px);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .mobile-menu a::before {
+    content: attr(data-num);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+  .mobile-menu.open a {
+    animation: menuLinkIn 0.5s cubic-bezier(.23,1,.32,1) forwards;
+  }
+  .mobile-menu.open a:nth-child(1) { animation-delay: 0.15s; }
+  .mobile-menu.open a:nth-child(2) { animation-delay: 0.22s; }
+  .mobile-menu.open a:nth-child(3) { animation-delay: 0.29s; }
+  .mobile-menu.open a:nth-child(4) { animation-delay: 0.36s; }
+  .mobile-menu a:hover { color: var(--accent); transform: translateX(8px); }
+  @keyframes menuLinkIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .mobile-menu-footer {
+    position: absolute; bottom: 2.5rem;
+    font-size: 0.62rem; letter-spacing: 0.12em;
+    color: var(--border); text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.4s 0.5s;
+  }
+  .mobile-menu.open .mobile-menu-footer { opacity: 1; }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .hero-stats { position: static; flex-wrap: wrap; gap: 2rem; border-top: 1px solid var(--border); }
+    .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+    .exp-meta { display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 1.2rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 4rem 1.5rem; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { padding: 1.5rem; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .contact-links { flex-direction: column; align-items: center; gap: 1rem; }
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 9997;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">AS</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#experience" data-num="01" onclick="closeMobile()">Experience</a>
+  <a href="#skills" data-num="02" onclick="closeMobile()">Skills</a>
+  <a href="#education" data-num="03" onclick="closeMobile()">Education</a>
+  <a href="#contact" data-num="04" onclick="closeMobile()">Contact</a>
+  <p class="mobile-menu-footer">Anmol Shami · Dublin 2026</p>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">// Business Analyst & Consultant</p>
+    <h1 class="hero-name">Anmol<br><em>Shami</em></h1>
+    <p class="hero-title">Techno-Functional · CRM · Project Management</p>
+    <p class="hero-desc">
+      4+ years delivering end-to-end business process solutions across CRM, low-code platforms, analytics, and integrated SaaS environments. Based in Dublin, currently pursuing an MSc at DCU.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn">View Work</a>
+      <a href="mailto:anmol.shami1@gmail.com" class="btn outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-visual">
+      <div class="skill-tag-float">CRM Expert</div>
+      <div class="skill-tag-float">Business Analysis</div>
+      <div class="skill-tag-float">Project Mgmt</div>
+      <div class="skill-tag-float">Zoho Platform</div>
+      <div class="orbit-container">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-center">AS</div>
       </div>
     </div>
   </div>
-</div>
-<div class="section" id="about">
-  <div class="container">
-    <div class="card" data-aos="fade-up" data-aos-offset="10">
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <div class="card-body">
-            <div class="h4 mt-0 title">About</div>
-            <p>Hello! I am Anmol Shami. Android Developer, Kotlin, Java, React Native.</p>
-            <p>I love exploring new technologies and staying updated on new things. I love listening to Music, Doing photography and spending time with my family and friends whenever possible. <a href="https://templateflip.com/templates/creative-cv/" target="_blank">Learn More</a></p>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <div class="card-body">
-            <div class="h4 mt-0 title">Basic Information</div>
-            <div class="row">
-              <div class="col-sm-4"><strong class="text-uppercase">Age:</strong></div>
-              <div class="col-sm-8">21</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
-              <div class="col-sm-8">anmol.shami1@gmail.com</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Phone:</strong></div>
-              <div class="col-sm-8">(+91)9167685504</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Address:</strong></div>
-              <div class="col-sm-8">Seawoods, Navi Mumbai, Maharshtra, India</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Language:</strong></div>
-              <div class="col-sm-8">English, Hindi, German</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-number">4+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">14+</span>
+      <span class="stat-label">Clients Delivered</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6+</span>
+      <span class="stat-label">CRM Projects</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">10+</span>
+      <span class="stat-label">Team Members Led</span>
     </div>
   </div>
-</div>
-<div class="section" id="skill">
-  <div class="container">
-    <div class="h4 text-center mb-4 title">Professional Skills</div>
-    <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Kotlin</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div><span class="progress-value">80%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Java</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><span class="progress-value">75%</span>
-              </div>
-            </div>
-          </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="experience">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-grid">
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-period">Aug 2024 – Aug 2025</p>
+          <p class="exp-company">Eventus Security</p>
+          <p class="exp-location">📍 India</p>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">React Native</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Python</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-          </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Techno-Functional Consultant</h3>
+          <ul class="exp-points">
+            <li>Delivered comprehensive technical and functional support across multiple internal departments, enhancing operational efficiency.</li>
+            <li>Designed and implemented process improvements that increased business efficiency by 10%.</li>
+            <li>Created detailed documentation for new and optimised processes, ensuring smooth knowledge transfer.</li>
+            <li>Developed creative, non-native platform enhancements that extended system capabilities.</li>
+            <li>Managed SaaS applications, ensuring high availability for business-critical operations.</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<div class="section" id="portfolio">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 ml-auto mr-auto">
-        <div class="h4 text-center mb-4 title">Portfolio</div>
-        <div class="nav-align-center">
-          <ul class="nav nav-pills nav-pills-primary" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#web-development" role="tablist"><i class="fa fa-laptop" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#graphic-design" role="tablist"><i class="fa fa-picture-o" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Photography" role="tablist"><i class="fa fa-camera" aria-hidden="true"></i></a></li>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-period">Dec 2022 – Aug 2024</p>
+          <p class="exp-company">White Global LLC</p>
+          <p class="exp-location">📍 Atlanta (Remote)</p>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">CRM Expert</h3>
+          <ul class="exp-points">
+            <li>Recognised SME for Zoho CRM Plus and Zoho One, delivering tailored solutions for diverse enterprise clients.</li>
+            <li>Led 6+ CRM implementation projects, overseeing requirements, configuration, testing, and rollout.</li>
+            <li>Provided ongoing post-implementation support, ensuring smooth operations for 6+ clients.</li>
+            <li>Trained and upskilled 4+ team members, standardising best practices and development guidelines.</li>
+            <li>Enhanced internal training programs, improving onboarding efficiency and team capability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-period">Oct 2020 – Dec 2022</p>
+          <p class="exp-company">Value Score Business Solutions</p>
+          <p class="exp-location">📍 India</p>
+        </div>
+        <div class="exp-content">
+          <h3 class="exp-role">Consultant / Technical Lead / Project Manager</h3>
+          <ul class="exp-points">
+            <li>Led and mentored a team of 10+ technical staff, improving performance, delivery quality, and skill development.</li>
+            <li>Collaborated directly with clients, partners, and internal stakeholders for 14+ client milestone deliveries.</li>
+            <li>Executed major IT improvement initiatives, enhancing organisational capability and modernising systems.</li>
+            <li>Integrated multiple third-party applications, driving workflow automation and reducing manual effort.</li>
+            <li>Delivered Tier 1, 2, and 3 technical support, ensuring complete lifecycle maintenance for client solutions.</li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="tab-content gallery mt-5">
-      <div class="tab-pane active" id="web-development">
-        <div class="ml-auto mr-auto">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="#web-development">
-                  <figure class="cc-effect"><img src="images/project-1.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">Recent Project</div>
-                      <p>TicTacToe with React Native.</p>
-                    </figcaption>
-                  </figure></a></div>
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom" margin="center"><a href="#web-development">
-                  <figure class="cc-effect"><img src="images/project-2.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">Second Project</div>
-                      <p>Chatbot in Tensorflow.</p>
-                    </figcaption>
-                  </figure></a></div>
-            </div>
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="#web-development">
-                  <figure class="cc-effect"><img src="images/project-3.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">First Project</div>
-                      <p>Students record app in Java.</p>
-                    </figcaption>
-                  </figure></a></div>
-          </div>
-        </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="skills-section">
+  <div class="section-header reveal" style="max-width:1100px;margin:0 auto 4rem;">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🧠</div>
+      <p class="skill-card-title">Business Analysis</p>
+      <div class="skill-tags">
+        <span class="skill-pill">Process Mapping</span>
+        <span class="skill-pill">BRD / FRD</span>
+        <span class="skill-pill">User Stories</span>
+        <span class="skill-pill">UAT Support</span>
+        <span class="skill-pill">Documentation</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">📊</div>
+      <p class="skill-card-title">Project Management</p>
+      <div class="skill-tags">
+        <span class="skill-pill">Stakeholder Mgmt</span>
+        <span class="skill-pill">Sprint Coordination</span>
+        <span class="skill-pill">Risk Identification</span>
+        <span class="skill-pill">Project Planning</span>
+        <span class="skill-pill">Delivery Oversight</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">⚙️</div>
+      <p class="skill-card-title">Tools & Platforms</p>
+      <div class="skill-tags">
+        <span class="skill-pill">Zoho CRM</span>
+        <span class="skill-pill">Zoho One</span>
+        <span class="skill-pill">Jira</span>
+        <span class="skill-pill">Confluence</span>
+        <span class="skill-pill">Draw.io</span>
+        <span class="skill-pill">Lucidchart</span>
+        <span class="skill-pill">Zoho Projects</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">💻</div>
+      <p class="skill-card-title">Technical Skills</p>
+      <div class="skill-tags">
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">API Integrations</span>
+        <span class="skill-pill">Deluge (Low-Code)</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🤝</div>
+      <p class="skill-card-title">Soft Skills</p>
+      <div class="skill-tags">
+        <span class="skill-pill">Communication</span>
+        <span class="skill-pill">Problem-Solving</span>
+        <span class="skill-pill">Leadership</span>
+        <span class="skill-pill">People Management</span>
+        <span class="skill-pill">Client Engagement</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🌐</div>
+      <p class="skill-card-title">CRM Expertise</p>
+      <div class="skill-tags">
+        <span class="skill-pill">Zoho CRM Plus</span>
+        <span class="skill-pill">Implementation</span>
+        <span class="skill-pill">Configuration</span>
+        <span class="skill-pill">SaaS Management</span>
+        <span class="skill-pill">Post-go-live Support</span>
       </div>
     </div>
   </div>
-</div>
-<div class="section" id="experience">
-  <div class="container cc-experience">
-    <div class="h4 text-center mb-4 title">Work Experience</div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>May 2019 - July 2019</p>
-            <div class="h5">Alkymia</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Marketing, Testing</div>
-            <p>Worked in Alkymia for Testing application and Marketing the application. </p>
-          </div>
-        </div>
-      </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="section-header reveal" style="max-width:1100px;margin:0 auto 4rem;">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <span class="edu-badge">🎓</span>
+      <p class="edu-degree">Master's Degree · Current</p>
+      <h3 class="edu-title">Business (Management)</h3>
+      <p class="edu-school">Dublin City University</p>
+      <p class="edu-year">September 2025 – July 2026 · Dublin, Ireland</p>
     </div>
-<div class="section">
-  <div class="container cc-education">
-    <div class="h4 text-center mb-4 title">Education</div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2017 - 2020</p>
-            <div class="h5">Bachelor's Degree</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Bachelor of Science in Information Technology</div>
-            <p class="category">Amity University, Mumbai</p>
-            <p>Graduated BSc IT in 2020 with 2nd class, 63.7%</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2015 - 2017</p>
-            <div class="h5">Senior Secondary</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Higher Secondary (Maharshtra)</div>
-            <p class="category">Fr.Agnels</p>
-            <p>Completed 10+2 with IT with 67.54%</p>
-          </div>
-        </div>
-      </div>
+
+    <div class="edu-card reveal">
+      <span class="edu-badge">📘</span>
+      <p class="edu-degree">Bachelor's Degree</p>
+      <h3 class="edu-title">Information Technology</h3>
+      <p class="edu-school">Amity University, Mumbai</p>
+      <p class="edu-year">2017 – 2020 · Mumbai, India</p>
     </div>
   </div>
-</div>
-<!--<div class="section" id="reference">
-  <div class="container cc-reference">
-    <div class="h4 mb-4 text-center title">References</div>
-    <div class="card" data-aos="zoom-in">
-      <div class="carousel slide" id="cc-Indicators" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li class="active" data-target="#cc-Indicators" data-slide-to="0"></li>
-          <li data-target="#cc-Indicators" data-slide-to="1"></li>
-          <li data-target="#cc-Indicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-lg-2 col-md-3 cc-reference-header"><img src="images/reference-image-1.jpg" alt="Image"/>
-                <div class="h5 pt-2">Aiyana</div>
-                <p class="category">CEO / WEBM</p>
-              </div>
-              <div class="col-lg-10 col-md-9">
-                <p> Habitasse venenatis commodo tempor eleifend arcu sociis sollicitudin ante pulvinar ad, est porta cras erat ullamcorper volutpat metus duis platea convallis, tortor primis ac quisque etiam luctus nisl nullam fames. Ligula purus suscipit tempus nascetur curabitur donec nam ullamcorper, laoreet nullam mauris dui aptent facilisis neque elementum ac, risus semper felis parturient fringilla rhoncus eleifend.</p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-lg-2 col-md-3 cc-reference-header"><img src="images/reference-image-2.jpg" alt="Image"/>
-                <div class="h5 pt-2">Braiden</div>
-                <p class="category">CEO / Creativem</p>
-              </div>
-              <div class="col-lg-10 col-md-9">
-                <p> Habitasse venenatis commodo tempor eleifend arcu sociis sollicitudin ante pulvinar ad, est porta cras erat ullamcorper volutpat metus duis platea convallis, tortor primis ac quisque etiam luctus nisl nullam fames. Ligula purus suscipit tempus nascetur curabitur donec nam ullamcorper, laoreet nullam mauris dui aptent facilisis neque elementum ac, risus semper felis parturient fringilla rhoncus eleifend.</p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-lg-2 col-md-3 cc-reference-header"><img src="images/reference-image-3.jpg" alt="Image"/>
-                <div class="h5 pt-2">Alexander</div>
-                <p class="category">CEO / Webnote</p>
-              </div>
-              <div class="col-lg-10 col-md-9">
-                <p> Habitasse venenatis commodo tempor eleifend arcu sociis sollicitudin ante pulvinar ad, est porta cras erat ullamcorper volutpat metus duis platea convallis, tortor primis ac quisque etiam luctus nisl nullam fames. Ligula purus suscipit tempus nascetur curabitur donec nam ullamcorper, laoreet nullam mauris dui aptent facilisis neque elementum ac, risus semper felis parturient fringilla rhoncus eleifend.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-big">Let's work<br><em>together.</em></h2>
+      <p class="contact-sub">
+        Currently based in Dublin and open to Business Analyst, Project Management, and Techno-Functional Consultant roles. Let's connect.
+      </p>
+    </div>
+
+    <div class="contact-links reveal">
+      <a href="mailto:anmol.shami1@gmail.com" class="contact-link">
+        <span>✉</span> anmol.shami1@gmail.com
+      </a>
+      <a href="tel:+353894174441" class="contact-link">
+        <span>☎</span> +353 894 174 441
+      </a>
+      <a href="https://www.linkedin.com/in/anmol-shami" target="_blank" class="contact-link">
+        <span>⟶</span> LinkedIn
+      </a>
+    </div>
+
+    <div class="reveal">
+      <a href="mailto:anmol.shami1@gmail.com" class="btn" style="font-size:0.75rem;padding:1rem 2.5rem;">
+        Send a Message →
+      </a>
     </div>
   </div>
-</div>-->
-<div class="section" id="contact">
-  <div class="cc-contact-information" style="background-image: url('images/staticmap.png');">
-    <div class="container">
-      <div class="cc-contact">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="card mb-0" data-aos="zoom-in">
-              <div class="h4 text-center title">Contact Me</div>
-              <div class="row">
-                <!--<div class="col-md-6">
-                  <div class="card-body">
-                    <form action="https://formspree.io/your@email.com" method="POST">
-                      <div class="p pb-3"><strong>Feel free to contact me </strong></div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
-                            <input class="form-control" type="text" name="name" placeholder="Name" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                            <input class="form-control" type="text" name="Subject" placeholder="Subject" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input class="form-control" type="email" name="_replyto" placeholder="E-mail" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Your Message" required="required"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <button class="btn btn-primary" type="submit">Send</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>-->
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <p class="mb-0"><strong>Address </strong></p>
-                    <p class="pb-2">Seawoods, Navi Mumbai, Maharshtra, India</p>
-                    <p class="mb-0"><strong>Phone</strong></p>
-                    <p class="pb-2">(+91)9167685504</p>
-                    <p class="mb-0"><strong>Email</strong></p>
-                    <p>anmol.shami1@gmail.com</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div></div>
-    </div>
-    <footer class="footer">
-      <div class="container text-center"><a class="cc-linkedin btn btn-link" href="https://www.linkedin.com/in/anmol-shami-25a077175/"><i class="fa fa-linkedin fa-2x " aria-hidden="true"></i></a><a class="cc-instagram btn btn-link" href="https://www.instagram.com/anmol5543/"><i class="fa fa-instagram fa-2x " aria-hidden="true"></i></a></div>
-      <div class="h4 title text-center">Anmol Shami</div>
-      <div class="text-center text-muted">
-        <p>&copy; Creative CV. All rights reserved.<br>Design - <a class="credit" href="https://templateflip.com" target="_blank">TemplateFlip</a></p>
-      </div>
-    </footer>
-    <script src="js/core/jquery.3.2.1.min.js"></script>
-    <script src="js/core/popper.min.js"></script>
-    <script src="js/core/bootstrap.min.js"></script>
-    <script src="js/now-ui-kit.js?v=1.1.0"></script>
-    <script src="js/aos.js"></script>
-    <script src="scripts/main.js"></script>
-  </body>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2026 Anmol Shami · Dublin, Ireland</p>
+  <p class="footer-credit">Portfolio · Business Analyst & Consultant</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .skill-card, .exp-item, .edu-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      cursor.style.background = 'var(--accent2)';
+      ring.style.opacity = '0.8';
+      ring.style.width = '60px'; ring.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursor.style.background = 'var(--accent)';
+      ring.style.opacity = '0.5';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    hamburger.classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  });
+
+  function closeMobile() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Stagger skill cards
+  document.querySelectorAll('.skill-card.reveal').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.08) + 's';
+  });
+</script>
+</body>
 </html>
