@@ -113,8 +113,17 @@ body {
   50% { opacity: .6; transform: scale(.85); }
 }
 .status-text { font-size: .65rem; font-weight: 600; color: var(--green); }
-.sb-location { font-size: .62rem; color: var(--slate-500); }
-.sb-location span { color: var(--slate-400); }
+.stamp1g-badge {
+  display: flex; align-items: center; gap: .5rem;
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.25);
+  border-radius: 6px;
+  padding: .5rem .75rem;
+  margin-bottom: .5rem;
+}
+.stamp1g-icon { font-size: .85rem; flex-shrink: 0; }
+.stamp1g-text { font-size: .62rem; font-weight: 700; color: #3b82f6; line-height: 1.3; }
+.stamp1g-text span { font-weight: 400; color: #60a5fa; font-size: .58rem; }
 
 /* ── Main ── */
 .main {
@@ -516,7 +525,11 @@ body {
       <div class="pulse"></div>
       <span class="status-text">Available for work</span>
     </div>
-    <div class="sb-location">Based in <span>Dublin, Ireland 🇮🇪</span></div>
+    <div class="stamp1g-badge">
+      <span class="stamp1g-icon">🇮🇪</span>
+      <div class="stamp1g-text">Stamp 1G Ready<br><span>Post-study work auth · 24 months</span></div>
+    </div>
+    <div class="sb-location">Based in <span>Dublin, Ireland</span></div>
   </div>
 </aside>
 
@@ -550,6 +563,7 @@ body {
             <span class="hero-eyebrow-tag">Business Analyst</span>
             <span class="hero-eyebrow-tag">Project Manager</span>
             <span class="hero-eyebrow-tag ie">Dublin, IE 🇮🇪</span>
+            <span class="hero-eyebrow-tag" style="background:#eff6ff;color:#2563eb;border:1px solid rgba(59,130,246,.2)">🛂 Stamp 1G Ready</span>
           </div>
           <h1 class="hero-name">Anmol<br><em>Shami</em></h1>
           <p class="hero-title">Techno-Functional Consultant &nbsp;·&nbsp; CRM Expert &nbsp;·&nbsp; SaaS Specialist</p>
