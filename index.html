@@ -4,598 +4,905 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anmol Shami — Business Analyst</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Geist+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ── Tokens ── */
 :root {
-  --bg: #f5f2eb;
-  --bg2: #ede9df;
-  --ink: #1a1814;
-  --ink2: #3a3630;
-  --muted: #8a8478;
-  --rule: #d4cfc4;
-  --red: #c0392b;
-  --card: #ffffff;
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-mono: 'Geist Mono', 'Courier New', Consolas, monospace;
-  --font-sans: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --sidebar-w: 260px;
+  --slate-950: #020617;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+  --white:     #ffffff;
+  --green:     #16a34a;
+  --green-l:   #dcfce7;
+  --green-d:   #14532d;
+  --red:       #dc2626;
+  --red-l:     #fee2e2;
+  --text:      #0f172a;
+  --body:      system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); font-weight: 400; overflow-x: hidden; cursor: none; }
-
-/* Cursor */
-.cur { width:10px; height:10px; background:var(--red); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .15s, background .2s; }
-.cur-r { width:32px; height:32px; border:1.5px solid var(--red); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s, height .3s, opacity .3s; opacity:.4; }
-
-/* Nav */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.4rem 3rem; transition:background .3s, box-shadow .3s; }
-nav.scrolled { background:rgba(245,242,235,0.95); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--rule); }
-.nav-brand { font-family:var(--font-serif); font-size:1.15rem; font-weight:700; color:var(--ink); text-decoration:none; }
-.nav-brand span { color:var(--red); }
-.nav-links { display:flex; gap:2.5rem; list-style:none; }
-.nav-links a { font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
-.nav-links a:hover { color:var(--red); }
-.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:none; padding:4px; z-index:101; position:relative; }
-.hamburger span { display:block; width:22px; height:1.5px; background:var(--ink); transition:transform .4s cubic-bezier(.23,1,.32,1), opacity .3s, width .3s, background .3s; transform-origin:center; }
-.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); background:var(--red); }
-.hamburger.open span:nth-child(2) { opacity:0; width:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); background:var(--red); }
-
-/* Mobile menu */
-.mob-menu { position:fixed; inset:0; z-index:90; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; pointer-events:none; opacity:0; clip-path:circle(0% at calc(100% - 50px) 50px); transition:clip-path .65s cubic-bezier(.77,0,.18,1), opacity .3s; }
-.mob-menu.open { pointer-events:all; opacity:1; clip-path:circle(160% at calc(100% - 50px) 50px); }
-.mob-menu a { font-family:var(--font-serif); font-size:2.8rem; font-weight:700; font-style:italic; color:var(--ink); text-decoration:none; opacity:0; transform:translateY(20px); transition:color .2s, transform .2s; display:flex; align-items:center; gap:.8rem; }
-.mob-menu.open a { animation:mlIn .5s cubic-bezier(.23,1,.32,1) forwards; }
-.mob-menu.open a:nth-child(1){animation-delay:.18s}
-.mob-menu.open a:nth-child(2){animation-delay:.25s}
-.mob-menu.open a:nth-child(3){animation-delay:.32s}
-.mob-menu.open a:nth-child(4){animation-delay:.39s}
-.mob-menu.open a:nth-child(5){animation-delay:.46s}
-.mob-menu a:hover { color:var(--red); transform:translateX(6px); }
-.mob-menu a .mn { font-family:var(--font-mono); font-size:.6rem; font-style:normal; color:var(--red); letter-spacing:.1em; }
-.mob-divider { width:1px; height:60px; background:var(--rule); opacity:0; transition:opacity .4s .55s; }
-.mob-menu.open .mob-divider { opacity:1; }
-.mob-contact { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); opacity:0; transition:opacity .4s .6s; }
-.mob-menu.open .mob-contact { opacity:1; }
-@keyframes mlIn { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-
-/* Hero */
-.hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; }
-.hero-bg { position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 79px, var(--rule) 79px, var(--rule) 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, var(--rule) 79px, var(--rule) 80px); opacity:.3; }
-.hero-main { display:grid; grid-template-columns:1fr 400px; gap:0; align-items:end; padding:10rem 3rem 4rem; position:relative; z-index:2; }
-.hero-eyebrow { display:flex; align-items:center; gap:.8rem; margin-bottom:1.5rem; }
-.hero-eyebrow-line { width:40px; height:1px; background:var(--red); }
-.hero-eyebrow-text { font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:var(--red); font-weight:600; font-family:var(--font-mono); }
-h1.hero-name { font-family:var(--font-serif); font-size:clamp(3.8rem,8vw,7.5rem); font-weight:900; line-height:.92; letter-spacing:-.03em; color:var(--ink); }
-h1.hero-name em { font-style:italic; color:var(--red); }
-.hero-subtitle { font-family:var(--font-serif); font-size:clamp(.9rem,1.8vw,1.1rem); font-weight:400; font-style:italic; color:var(--muted); margin-top:1.2rem; }
-.hero-desc { font-size:.82rem; line-height:1.85; color:var(--ink2); max-width:520px; margin-top:1.8rem; }
-.hero-cta { display:flex; gap:1rem; margin-top:2.5rem; }
-.btn-primary { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 2rem; background:var(--red); color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; border:2px solid var(--red); transition:background .25s, color .25s; cursor:none; }
-.btn-primary:hover { background:transparent; color:var(--red); }
-.btn-ghost { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 2rem; background:transparent; color:var(--ink); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; border:2px solid var(--rule); transition:border-color .25s, color .25s; cursor:none; }
-.btn-ghost:hover { border-color:var(--ink); }
-.hero-right { display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:.5rem; }
-.hero-card { background:var(--card); border:1px solid var(--rule); padding:2rem; box-shadow:4px 4px 0 var(--rule); }
-.hero-card-label { font-family:var(--font-mono); font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2rem; }
-.stat-row { display:flex; flex-direction:column; gap:1.2rem; }
-.stat-line { display:flex; justify-content:space-between; align-items:baseline; padding-bottom:.8rem; border-bottom:1px solid var(--rule); }
-.stat-line:last-child { border-bottom:none; padding-bottom:0; }
-.stat-val { font-family:var(--font-serif); font-size:2rem; font-weight:900; color:var(--red); line-height:1; }
-.stat-lbl { font-size:.65rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:right; max-width:120px; line-height:1.4; }
-.hero-ticker { position:relative; z-index:2; border-top:1px solid var(--rule); padding:1rem 3rem; display:flex; gap:3rem; overflow:hidden; background:var(--bg); flex-wrap:wrap; }
-.ticker-item { display:flex; align-items:center; gap:.6rem; white-space:nowrap; }
-.ticker-dot { width:5px; height:5px; background:var(--red); border-radius:50%; flex-shrink:0; }
-.ticker-text { font-family:var(--font-mono); font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-
-/* Sections */
-.section { padding:6rem 3rem; }
-.section-alt { background:var(--bg2); }
-.sec-head { display:flex; align-items:center; gap:1.5rem; margin-bottom:4rem; }
-.sec-num { font-family:var(--font-mono); font-size:.6rem; letter-spacing:.2em; color:var(--red); }
-.sec-title { font-family:var(--font-serif); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:900; letter-spacing:-.02em; line-height:1; }
-.sec-rule { flex:1; height:1px; background:var(--rule); }
-
-/* About */
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; max-width:1100px; margin:0 auto; align-items:start; }
-.about-text p { font-size:.88rem; line-height:1.9; color:var(--ink2); margin-bottom:1.2rem; }
-.about-text p:last-child { margin-bottom:0; }
-.about-aside { display:flex; flex-direction:column; gap:1.5rem; }
-.about-fact { display:flex; gap:1rem; align-items:flex-start; padding:1.2rem; background:var(--card); border:1px solid var(--rule); box-shadow:3px 3px 0 var(--rule); }
-.about-fact-icon { font-size:1.2rem; flex-shrink:0; margin-top:.1rem; }
-.about-fact-label { font-size:.6rem; font-family:var(--font-mono); letter-spacing:.15em; text-transform:uppercase; color:var(--red); margin-bottom:.3rem; }
-.about-fact-val { font-size:.8rem; font-weight:600; color:var(--ink); line-height:1.4; }
-
-/* Experience */
-.exp-wrap { max-width:1100px; margin:0 auto; }
-.exp-item { display:grid; grid-template-columns:260px 1fr; gap:0 3rem; padding:3rem 0; border-bottom:1px solid var(--rule); position:relative; }
-.exp-item:first-child { border-top:1px solid var(--rule); }
-.exp-item::before { content:''; position:absolute; left:-3rem; top:0; bottom:0; width:3px; background:var(--red); transform:scaleY(0); transform-origin:top; transition:transform .45s ease; }
-@media(min-width:901px){ .exp-item:hover::before { transform:scaleY(1); } }
-.exp-period { font-family:var(--font-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin-bottom:.6rem; }
-.exp-co { font-weight:800; font-size:.9rem; color:var(--ink); margin-bottom:.3rem; }
-.exp-loc { font-size:.68rem; color:var(--muted); }
-.exp-role { font-family:var(--font-serif); font-size:1.35rem; font-weight:700; color:var(--ink); margin-bottom:1.1rem; line-height:1.2; }
-.exp-bullets { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
-.exp-bullets li { font-size:.78rem; line-height:1.8; color:var(--ink2); padding-left:1.1rem; position:relative; }
-.exp-bullets li::before { content:'▸'; position:absolute; left:0; color:var(--red); font-size:.6rem; top:.15rem; }
-.exp-bullets li strong { color:var(--ink); font-weight:700; }
-
-/* Skills */
-.skills-wrap { max-width:1100px; margin:0 auto; }
-.skills-table { width:100%; border-collapse:collapse; }
-.skills-table tr { border-bottom:1px solid var(--rule); }
-.skills-table tr:last-child { border-bottom:none; }
-.skills-table tr:first-child { border-top:1px solid var(--rule); }
-.skills-table td { padding:1.4rem 0; vertical-align:top; }
-.skills-table td:first-child { width:220px; padding-right:2rem; }
-.sk-cat { font-family:var(--font-mono); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--red); font-weight:500; }
-.sk-pills { display:flex; flex-wrap:wrap; gap:.5rem; }
-.sk-pill { font-size:.68rem; font-weight:600; padding:.3rem .8rem; background:var(--card); border:1px solid var(--rule); color:var(--ink2); transition:border-color .2s, color .2s; cursor:none; }
-.sk-pill:hover { border-color:var(--red); color:var(--red); }
-
-/* Certifications */
-.cert-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
-.cert-card { background:var(--card); border:1px solid var(--rule); padding:1.8rem; position:relative; overflow:hidden; transition:transform .3s, box-shadow .3s, border-color .3s; cursor:none; }
-.cert-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.08); border-color:var(--red); }
-.cert-card::before { content:''; position:absolute; top:0; right:0; width:3px; height:0; background:var(--red); transition:height .4s ease; }
-.cert-card:hover::before { height:100%; }
-.cert-issuer { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--red); margin-bottom:.6rem; }
-.cert-name { font-size:.85rem; font-weight:700; color:var(--ink); margin-bottom:.5rem; line-height:1.4; }
-.cert-meta { font-size:.65rem; color:var(--muted); margin-bottom:.8rem; }
-.cert-note { font-size:.68rem; color:var(--ink2); line-height:1.6; }
-
-/* Education */
-.edu-wrap { max-width:1100px; margin:0 auto; }
-.edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
-.edu-card { background:var(--card); border:1px solid var(--rule); padding:2.5rem; position:relative; overflow:hidden; transition:border-color .3s, transform .3s; }
-.edu-card:hover { border-color:var(--red); transform:translateY(-3px); }
-.edu-tag { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--red); margin-bottom:.8rem; }
-.edu-degree { font-family:var(--font-serif); font-size:1.3rem; font-weight:700; margin-bottom:.4rem; line-height:1.2; }
-.edu-school { font-size:.8rem; font-weight:700; color:var(--muted); margin-bottom:.3rem; }
-.edu-period { font-family:var(--font-mono); font-size:.62rem; color:var(--muted); }
-.edu-note { font-size:.72rem; color:var(--ink2); margin-top:.8rem; line-height:1.6; padding-top:.8rem; border-top:1px solid var(--rule); }
-.edu-glyph { position:absolute; bottom:-1rem; right:1rem; font-size:5rem; opacity:.06; line-height:1; }
-
-/* Contact */
-.contact-wrap { max-width:900px; margin:0 auto; text-align:center; }
-.contact-title { font-family:var(--font-serif); font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; letter-spacing:-.03em; line-height:1; margin-bottom:1rem; }
-.contact-title em { font-style:italic; color:var(--red); }
-.contact-sub { font-size:.82rem; color:var(--muted); line-height:1.85; max-width:520px; margin:0 auto 2.5rem; }
-.contact-strip { display:flex; justify-content:center; border:1px solid var(--rule); margin-bottom:3rem; flex-wrap:wrap; }
-.contact-item { display:flex; flex-direction:column; align-items:center; gap:.4rem; padding:1.5rem 2.5rem; border-right:1px solid var(--rule); text-decoration:none; cursor:none; transition:background .2s; flex:1; min-width:180px; }
-.contact-item:last-child { border-right:none; }
-.contact-item:hover { background:var(--bg2); }
-.contact-item-icon { font-size:1.1rem; }
-.contact-item-label { font-family:var(--font-mono); font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--red); }
-.contact-item-val { font-size:.72rem; font-weight:600; color:var(--ink); }
-
-/* Footer */
-footer { background:var(--ink); color:rgba(255,255,255,.4); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:.6rem; letter-spacing:.1em; }
-footer .hl { color:var(--red); }
-
-/* Reveal */
-.reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-/* Responsive */
-@media(max-width:960px){
-  .hero-main { grid-template-columns:1fr; padding:9rem 2rem 3rem; }
-  .hero-right { display:none; }
-  .about-grid { grid-template-columns:1fr; gap:2.5rem; }
-  .exp-item { grid-template-columns:1fr; gap:.8rem; }
-  .exp-left { display:flex; gap:1rem; align-items:baseline; flex-wrap:wrap; }
-  .edu-grid { grid-template-columns:1fr; }
-  .nav-links { display:none; }
-  .hamburger { display:flex; }
-  nav { padding:1.2rem 1.5rem; }
-  .section { padding:4.5rem 1.5rem; }
-  .hero-ticker { padding:1rem 1.5rem; gap:1.5rem; }
+body {
+  font-family: var(--body);
+  background: var(--slate-100);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
 }
-@media(max-width:600px){
-  .contact-strip { flex-direction:column; }
-  .contact-item { border-right:none; border-bottom:1px solid var(--rule); }
-  .contact-item:last-child { border-bottom:none; }
-  footer { flex-direction:column; gap:.5rem; text-align:center; }
-  .skills-table td:first-child { width:140px; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--slate-900);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  z-index: 200;
+  transition: transform 0.35s cubic-bezier(.77,0,.18,1);
+}
+
+.sb-logo {
+  padding: 0 1.5rem 2rem;
+  border-bottom: 1px solid var(--slate-800);
+  margin-bottom: 1.5rem;
+}
+.sb-initials {
+  width: 44px; height: 44px;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800; color: #fff;
+  letter-spacing: -.02em;
+  margin-bottom: .8rem;
+}
+.sb-name { font-size: .8rem; font-weight: 700; color: var(--white); }
+.sb-role { font-size: .65rem; color: var(--slate-400); margin-top: .15rem; }
+
+.sb-nav { flex: 1; padding: 0 .75rem; }
+.sb-section-label {
+  font-size: .58rem; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--slate-500);
+  padding: 0 .75rem; margin-bottom: .4rem; margin-top: 1.5rem;
+}
+.sb-section-label:first-child { margin-top: 0; }
+.sb-link {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .75rem;
+  font-size: .78rem; font-weight: 500;
+  color: var(--slate-400);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+}
+.sb-link:hover { background: var(--slate-800); color: var(--white); }
+.sb-link.active { background: var(--slate-800); color: var(--white); }
+.sb-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: .7; }
+
+.sb-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--slate-800);
+  margin-top: auto;
+}
+.status-badge {
+  display: flex; align-items: center; gap: .5rem;
+  background: rgba(22,163,74,.12);
+  border: 1px solid rgba(22,163,74,.25);
+  border-radius: 6px;
+  padding: .5rem .75rem;
+  margin-bottom: .75rem;
+}
+.pulse {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .6; transform: scale(.85); }
+}
+.status-text { font-size: .65rem; font-weight: 600; color: var(--green); }
+.sb-location { font-size: .62rem; color: var(--slate-500); }
+.sb-location span { color: var(--slate-400); }
+
+/* ── Main ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── Topbar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(241,245,249,.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--slate-200);
+  padding: .85rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar-path { font-size: .72rem; color: var(--slate-500); }
+.topbar-path span { color: var(--text); font-weight: 600; }
+.topbar-actions { display: flex; gap: .75rem; }
+.topbar-btn {
+  padding: .45rem 1.1rem;
+  font-size: .72rem; font-weight: 600;
+  border-radius: 6px; text-decoration: none;
+  transition: background .15s, color .15s;
+  cursor: pointer; border: none;
+}
+.btn-outline { background: var(--white); border: 1px solid var(--slate-200); color: var(--text); }
+.btn-outline:hover { border-color: var(--slate-400); }
+.btn-solid { background: var(--green); color: #fff; border: 1px solid transparent; }
+.btn-solid:hover { background: #15803d; }
+.hamburger-btn {
+  display: none; background: none; border: none; cursor: pointer;
+  flex-direction: column; gap: 4px; padding: 4px;
+}
+.hamburger-btn span {
+  display: block; width: 20px; height: 1.5px;
+  background: var(--text);
+  transition: transform .35s cubic-bezier(.23,1,.32,1), opacity .25s, width .25s;
+  transform-origin: center;
+}
+.hamburger-btn.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ── Page content ── */
+.page { padding: 2.5rem; max-width: 1080px; }
+
+/* ── Hero bento ── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 180px 180px;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.hero-main-card {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-main-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green) 0%, #4ade80 50%, var(--red) 100%);
+  border-radius: 10px 10px 0 0;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: .5rem;
+  margin-bottom: 1.2rem;
+}
+.hero-eyebrow-tag {
+  font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--green-l); color: var(--green-d);
+  padding: .2rem .6rem; border-radius: 4px;
+}
+.hero-eyebrow-tag.ie {
+  background: rgba(220,38,38,.08); color: var(--red);
+}
+.hero-name {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: .95;
+  color: var(--text);
+  margin-bottom: .8rem;
+}
+.hero-name em { font-style: normal; color: var(--green); }
+.hero-title {
+  font-size: .78rem;
+  color: var(--slate-500);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.hero-desc {
+  font-size: .82rem;
+  line-height: 1.75;
+  color: var(--slate-500);
+  max-width: 480px;
+  margin-bottom: 2rem;
+}
+.hero-btns { display: flex; gap: .6rem; flex-wrap: wrap; }
+.stat-card {
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.stat-label {
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--slate-400); margin-bottom: .5rem;
+}
+.stat-value {
+  font-size: 2.4rem; font-weight: 800; letter-spacing: -.04em;
+  line-height: 1; color: var(--text);
+}
+.stat-value.green { color: var(--green); }
+.stat-value.red { color: var(--red); }
+.stat-sub { font-size: .65rem; color: var(--slate-400); margin-top: .3rem; }
+
+/* ── Skills bar ── */
+.skills-bar {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.skills-bar-label {
+  font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--slate-400); margin-right: .5rem; white-space: nowrap;
+}
+.tag {
+  font-size: .68rem; font-weight: 600;
+  padding: .28rem .7rem;
+  border-radius: 5px;
+  background: var(--slate-100);
+  color: var(--slate-500);
+  border: 1px solid var(--slate-200);
+  transition: background .15s, color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.tag:hover { background: var(--green-l); color: var(--green-d); border-color: rgba(22,163,74,.2); }
+.tag.green { background: var(--green-l); color: var(--green-d); border-color: rgba(22,163,74,.2); }
+.tag.red { background: var(--red-l); color: var(--red); border-color: rgba(220,38,38,.15); }
+
+/* ── Section heading ── */
+.sec-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.sec-heading {
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--slate-400);
+  display: flex; align-items: center; gap: .6rem;
+}
+.sec-heading::before {
+  content: '';
+  display: inline-block; width: 10px; height: 10px;
+  background: var(--green); border-radius: 2px;
+  flex-shrink: 0;
+}
+.sec-count {
+  font-size: .6rem; background: var(--slate-100); border: 1px solid var(--slate-200);
+  padding: .15rem .4rem; border-radius: 4px; color: var(--slate-500); font-weight: 600;
+}
+
+/* ── Experience ── */
+.exp-list { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 1rem; }
+.exp-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.2rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.exp-card:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,.07); }
+.exp-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: .9rem; }
+.exp-co-dot {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--slate-900); display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; font-weight: 800; color: var(--white); flex-shrink: 0; letter-spacing: -.02em;
+}
+.exp-co-dot.green { background: var(--green); }
+.exp-co-dot.red { background: var(--red); }
+.exp-role-name { font-size: .9rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+.exp-co-name { font-size: .72rem; color: var(--slate-500); margin-top: .1rem; }
+.exp-meta-col { text-align: right; flex-shrink: 0; }
+.exp-period {
+  font-size: .62rem; font-weight: 600; color: var(--slate-400);
+  background: var(--slate-100); border: 1px solid var(--slate-200);
+  padding: .25rem .6rem; border-radius: 5px; white-space: nowrap;
+  display: inline-block; margin-bottom: .4rem;
+}
+.exp-location { font-size: .62rem; color: var(--slate-400); text-align: right; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.exp-bullets li {
+  font-size: .78rem; line-height: 1.7; color: var(--slate-500);
+  padding-left: 1rem; position: relative;
+}
+.exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--green); font-size: .7rem; }
+.exp-bullets li strong { color: var(--text); font-weight: 700; }
+
+/* ── Skills section ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  transition: border-color .2s;
+}
+.skill-card:hover { border-color: var(--green); }
+.skill-card-head {
+  display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem;
+}
+.skill-card-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--slate-100); display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+}
+.skill-card-title { font-size: .72rem; font-weight: 700; color: var(--text); }
+.skill-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+/* ── Certifications ── */
+.cert-list { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1rem; }
+.cert-row {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1rem 1.4rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 1rem; align-items: center;
+  transition: border-color .2s;
+}
+.cert-row:hover { border-color: var(--green); }
+.cert-name { font-size: .8rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
+.cert-issuer { font-size: .65rem; color: var(--slate-400); }
+.cert-badge {
+  font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 5px; white-space: nowrap; text-align: center;
+}
+.cert-badge.cpd { background: var(--green-l); color: var(--green-d); }
+.cert-badge.pmi { background: #eff6ff; color: #1d4ed8; }
+.cert-badge.dcu { background: #fdf4ff; color: #7e22ce; }
+
+/* ── Education ── */
+.edu-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+  margin-bottom: 1rem;
+}
+.edu-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: border-color .2s;
+}
+.edu-card:hover { border-color: var(--green); }
+.edu-degree { font-size: .85rem; font-weight: 800; color: var(--text); margin-bottom: .3rem; }
+.edu-school { font-size: .72rem; color: var(--slate-500); margin-bottom: .6rem; }
+.edu-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+/* ── Contact card ── */
+.contact-card {
+  background: var(--slate-900);
+  border-radius: 10px;
+  padding: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.contact-card::before {
+  content: '';
+  position: absolute; bottom: 0; right: 0;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at center, rgba(22,163,74,.15) 0%, transparent 70%);
+}
+.contact-title {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
+  color: var(--white); margin-bottom: .6rem;
+}
+.contact-title em { font-style: normal; color: var(--green); }
+.contact-sub { font-size: .8rem; color: var(--slate-400); margin-bottom: 2rem; line-height: 1.7; }
+.contact-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+.contact-link {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .6rem 1.1rem;
+  background: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.contact-link:hover { background: var(--slate-700); border-color: var(--slate-500); }
+.contact-link-icon { font-size: .85rem; }
+.contact-link-val { font-size: .72rem; font-weight: 600; color: var(--white); }
+
+/* ── Footer ── */
+.page-footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--slate-200);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .62rem; color: var(--slate-400);
+}
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Overlay (mobile) ── */
+.overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 150;
+}
+.overlay.show { display: block; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  body { display: block; }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { padding: .85rem 1.25rem; }
+  .page { padding: 1.25rem; }
+  .hero-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .hero-main-card { grid-column: 1 / -1; grid-row: 1; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .exp-card { grid-template-columns: 1fr; }
+  .exp-meta-col { text-align: left; }
+  .hamburger-btn { display: flex; }
+  .topbar-actions .btn-outline { display: none; }
+}
+@media (max-width: 480px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-name { font-size: 2.5rem; }
+  .contact-links { flex-direction: column; }
 }
 </style>
 </head>
 <body>
 
-<div class="cur" id="cur"></div>
-<div class="cur-r" id="curR"></div>
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<nav id="nav">
-  <a href="#" class="nav-brand">Anmol<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-initials">AS</div>
+    <div class="sb-name">Anmol Shami</div>
+    <div class="sb-role">Business Analyst · Dublin</div>
+  </div>
 
-<div class="mob-menu" id="mobMenu">
-  <a href="#about" onclick="closeMob()"><span class="mn">01</span>About</a>
-  <a href="#experience" onclick="closeMob()"><span class="mn">02</span>Experience</a>
-  <a href="#skills" onclick="closeMob()"><span class="mn">03</span>Skills</a>
-  <a href="#certifications" onclick="closeMob()"><span class="mn">04</span>Certifications</a>
-  <a href="#contact" onclick="closeMob()"><span class="mn">05</span>Contact</a>
-  <div class="mob-divider"></div>
-  <p class="mob-contact">anmol.shami1@gmail.com</p>
+  <nav class="sb-nav">
+    <div class="sb-section-label">Navigation</div>
+    <a href="#overview" class="sb-link active">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Overview
+    </a>
+    <a href="#experience" class="sb-link">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="11" rx="1.5"/><path d="M5 3V2a1 1 0 011-1h4a1 1 0 011 1v1"/><path d="M1 7h14"/></svg>
+      Experience
+    </a>
+    <a href="#skills" class="sb-link">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M8 4v4l3 2"/></svg>
+      Skills
+    </a>
+    <a href="#certifications" class="sb-link">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l1.8 3.5L14 5.3l-3 2.9.7 4.1L8 10.4l-3.7 1.9.7-4.1-3-2.9 4.2-.8z"/></svg>
+      Certifications
+    </a>
+    <a href="#education" class="sb-link">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6l7-4 7 4-7 4-7-4z"/><path d="M4 7.5V12c0 1.1 1.8 2 4 2s4-.9 4-2V7.5"/></svg>
+      Education
+    </a>
+    <a href="#contact" class="sb-link">
+      <svg class="sb-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v9A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-9z"/><path d="M1 4l7 5 7-5"/></svg>
+      Contact
+    </a>
+  </nav>
+
+  <div class="sb-footer">
+    <div class="status-badge">
+      <div class="pulse"></div>
+      <span class="status-text">Available for work</span>
+    </div>
+    <div class="sb-location">Based in <span>Dublin, Ireland 🇮🇪</span></div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <button class="hamburger-btn" id="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-path">anmol-shami.ie / <span>portfolio</span></div>
+    </div>
+    <div class="topbar-actions">
+      <a href="https://www.linkedin.com/in/anmol-shami" target="_blank" class="topbar-btn btn-outline">LinkedIn</a>
+      <a href="mailto:anmol.shami1@gmail.com" class="topbar-btn btn-solid">Hire Me</a>
+    </div>
+  </div>
+
+  <!-- Page -->
+  <div class="page">
+
+    <!-- OVERVIEW -->
+    <section id="overview">
+
+      <!-- Hero bento grid -->
+      <div class="hero-grid reveal">
+        <div class="card hero-main-card">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-tag">Business Analyst</span>
+            <span class="hero-eyebrow-tag">Project Manager</span>
+            <span class="hero-eyebrow-tag ie">Dublin, IE 🇮🇪</span>
+          </div>
+          <h1 class="hero-name">Anmol<br><em>Shami</em></h1>
+          <p class="hero-title">Techno-Functional Consultant &nbsp;·&nbsp; CRM Expert &nbsp;·&nbsp; SaaS Specialist</p>
+          <p class="hero-desc">4+ years delivering end-to-end CRM implementations, SaaS integrations, and process improvement across 20+ client engagements. Bridging the gap between technical teams and business stakeholders. Currently completing an MSc at Dublin City University.</p>
+          <div class="hero-btns">
+            <a href="#experience" class="topbar-btn btn-solid">View Experience</a>
+            <a href="mailto:anmol.shami1@gmail.com" class="topbar-btn btn-outline">Get in Touch</a>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-label">Experience</div>
+          <div>
+            <div class="stat-value green">4+</div>
+            <div class="stat-sub">Years in BA &amp; CRM</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-label">Clients</div>
+          <div>
+            <div class="stat-value">20+</div>
+            <div class="stat-sub">Delivered engagements</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-label">CRM Projects</div>
+          <div>
+            <div class="stat-value red">6+</div>
+            <div class="stat-sub">Full-cycle implementations</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-label">Team Size</div>
+          <div>
+            <div class="stat-value">10+</div>
+            <div class="stat-sub">Staff led &amp; mentored</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills bar -->
+      <div class="skills-bar reveal">
+        <span class="skills-bar-label">Top Skills</span>
+        <span class="tag green">Business Analysis</span>
+        <span class="tag">CRM Implementation</span>
+        <span class="tag">Process Mapping (BPMN)</span>
+        <span class="tag">Agile / Scrum</span>
+        <span class="tag">SaaS Administration</span>
+        <span class="tag">Stakeholder Management</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+      </div>
+
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" style="padding-top:2rem">
+      <div class="sec-row reveal">
+        <div class="sec-heading">Experience</div>
+        <span class="sec-count">3 roles</span>
+      </div>
+      <div class="exp-list">
+        <div class="exp-card reveal">
+          <div>
+            <div class="exp-header">
+              <div class="exp-co-dot green">ES</div>
+              <div>
+                <div class="exp-role-name">Techno-Functional Consultant <span style="font-size:.72rem;font-weight:500;color:var(--slate-400)">(BA &amp; Systems Lead)</span></div>
+                <div class="exp-co-name">Eventus Security Pvt. Ltd. &nbsp;·&nbsp; India</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Mapped and redesigned <strong>5+ core business workflows</strong> using BPMN, achieving a measurable <strong>10% efficiency gain</strong> by eliminating redundant manual steps.</li>
+              <li>Created structured process documentation (SOPs, flow diagrams) adopted across <strong>3 internal departments</strong>, improving knowledge continuity.</li>
+              <li>Identified and mitigated <strong>3 critical implementation risks</strong> during a SaaS platform rollout through proactive UAT coordination.</li>
+              <li>Managed SaaS application administration, maintaining <strong>99%+ uptime</strong> for business-critical tools.</li>
+            </ul>
+          </div>
+          <div class="exp-meta-col">
+            <div class="exp-period">Aug 2024 – Aug 2025</div>
+            <div class="exp-location">India</div>
+          </div>
+        </div>
+
+        <div class="exp-card reveal">
+          <div>
+            <div class="exp-header">
+              <div class="exp-co-dot red">WG</div>
+              <div>
+                <div class="exp-role-name">CRM Expert <span style="font-size:.72rem;font-weight:500;color:var(--slate-400)">(BA &amp; Implementation Lead)</span></div>
+                <div class="exp-co-name">White Global LLC &nbsp;·&nbsp; Atlanta, USA (Remote)</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Led <strong>6+ full-cycle CRM implementation projects</strong> from BRD/FRD creation through configuration, UAT, and go-live — on time and within scope for all engagements.</li>
+              <li>Managed post-implementation support for <strong>6 concurrent clients</strong>, resolving escalations within agreed SLAs.</li>
+              <li>Trained and mentored <strong>4 junior consultants</strong>, establishing guidelines that reduced rework by an estimated <strong>25%</strong>.</li>
+              <li>Produced client-facing documentation including process flows, user guides, and executive reports.</li>
+            </ul>
+          </div>
+          <div class="exp-meta-col">
+            <div class="exp-period">Dec 2022 – Aug 2024</div>
+            <div class="exp-location">Remote</div>
+          </div>
+        </div>
+
+        <div class="exp-card reveal">
+          <div>
+            <div class="exp-header">
+              <div class="exp-co-dot">VS</div>
+              <div>
+                <div class="exp-role-name">Consultant / Technical Lead / Project Manager</div>
+                <div class="exp-co-name">Value Score Business Solutions &nbsp;·&nbsp; India</div>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Led a cross-functional team of <strong>10+ technical staff</strong> across multiple concurrent client projects.</li>
+              <li>Managed delivery for <strong>14+ clients</strong> across IT consulting and SaaS implementation engagements.</li>
+              <li>Integrated <strong>8+ third-party applications</strong> via APIs and automation tools, enabling cross-platform data flow.</li>
+              <li>Executed <strong>3 major IT modernisation initiatives</strong>, migrating legacy systems to cloud-based platforms.</li>
+            </ul>
+          </div>
+          <div class="exp-meta-col">
+            <div class="exp-period">Oct 2020 – Dec 2022</div>
+            <div class="exp-location">India</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" style="padding-top:2rem">
+      <div class="sec-row reveal">
+        <div class="sec-heading">Skills</div>
+        <span class="sec-count">6 categories</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">🔍</div>
+            <div class="skill-card-title">Business Analysis</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">Requirements Elicitation</span><span class="tag">BRD / FRD</span><span class="tag">Process Mapping (BPMN)</span><span class="tag">User Stories</span><span class="tag">UAT Planning</span><span class="tag">Gap Analysis</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">📋</div>
+            <div class="skill-card-title">Project Management</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">Stakeholder Management</span><span class="tag">Agile / Scrum</span><span class="tag">Sprint Coordination</span><span class="tag">Risk Identification</span><span class="tag">Delivery Oversight</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">⚙️</div>
+            <div class="skill-card-title">CRM &amp; SaaS</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">CRM Implementation</span><span class="tag">SaaS Administration</span><span class="tag">SaaS Lifecycle Mgmt</span><span class="tag">Platform Configuration</span><span class="tag">Post-Go-Live Support</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">🛠</div>
+            <div class="skill-card-title">Tools</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">Jira</span><span class="tag">Confluence</span><span class="tag">Lucidchart</span><span class="tag">Draw.io</span><span class="tag">MS Excel (Advanced)</span><span class="tag">Power BI</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">💻</div>
+            <div class="skill-card-title">Technical</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">SQL</span><span class="tag">Python (Pandas)</span><span class="tag">API Integrations</span><span class="tag">Low-Code Development</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-card-icon">🤝</div>
+            <div class="skill-card-title">Soft Skills</div>
+          </div>
+          <div class="skill-pills">
+            <span class="tag">Leadership</span><span class="tag">Communication</span><span class="tag">People Management</span><span class="tag">Client Engagement</span><span class="tag">Cross-Functional Collaboration</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" style="padding-top:2rem">
+      <div class="sec-row reveal">
+        <div class="sec-heading">Certifications</div>
+        <span class="sec-count">5 certs · Feb 2026</span>
+      </div>
+      <div class="cert-list">
+        <div class="cert-row reveal">
+          <div>
+            <div class="cert-name">Advanced Excel</div>
+            <div class="cert-issuer">Kubicle &nbsp;·&nbsp; Chartered Accountants Ireland Approved &nbsp;·&nbsp; 9 CPD Credits</div>
+          </div>
+          <span class="cert-badge cpd">CPD Accredited</span>
+        </div>
+        <div class="cert-row reveal">
+          <div>
+            <div class="cert-name">Data Visualization &amp; Presentation</div>
+            <div class="cert-issuer">Kubicle &nbsp;·&nbsp; Chartered Accountants Ireland Approved &nbsp;·&nbsp; 5.5 CPD Credits</div>
+          </div>
+          <span class="cert-badge cpd">CPD Accredited</span>
+        </div>
+        <div class="cert-row reveal">
+          <div>
+            <div class="cert-name">Modern Project Management in Microsoft 365</div>
+            <div class="cert-issuer">LinkedIn Learning &nbsp;·&nbsp; PMI Accredited &nbsp;·&nbsp; 2 PDUs</div>
+          </div>
+          <span class="cert-badge pmi">PMI Accredited</span>
+        </div>
+        <div class="cert-row reveal">
+          <div>
+            <div class="cert-name">Consulting Foundations: Client Management &amp; Relationships</div>
+            <div class="cert-issuer">LinkedIn Learning &nbsp;·&nbsp; NASBA CPE &nbsp;·&nbsp; 1.4 Credits</div>
+          </div>
+          <span class="cert-badge pmi">NASBA CPE</span>
+        </div>
+        <div class="cert-row reveal">
+          <div>
+            <div class="cert-name">Business Ethics: An Introduction to Ethics for Business Leaders</div>
+            <div class="cert-issuer">Dublin City University &nbsp;·&nbsp; FutureLearn</div>
+          </div>
+          <span class="cert-badge dcu">DCU</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" style="padding-top:2rem">
+      <div class="sec-row reveal">
+        <div class="sec-heading">Education</div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card reveal">
+          <div class="edu-degree">MSc Business (Management)</div>
+          <div class="edu-school">Dublin City University &nbsp;·&nbsp; Dublin, Ireland</div>
+          <div class="edu-tags">
+            <span class="tag green">Current</span>
+            <span class="tag">Sep 2025 – Aug 2026</span>
+            <span class="tag">Strategy</span>
+            <span class="tag">Data Analytics</span>
+            <span class="tag">Leadership</span>
+          </div>
+        </div>
+        <div class="edu-card reveal">
+          <div class="edu-degree">BSc Information Technology</div>
+          <div class="edu-school">Amity University &nbsp;·&nbsp; Mumbai, India</div>
+          <div class="edu-tags">
+            <span class="tag">2017 – 2020</span>
+            <span class="tag">Computer Science</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="padding-top:2rem">
+      <div class="contact-card reveal">
+        <h2 class="contact-title">Let's build<br><em>something great.</em></h2>
+        <p class="contact-sub">Open to Business Analyst, Project Manager, and Techno-Functional roles in Dublin.<br>Currently on Stamp 1G — eligible to work in Ireland.</p>
+        <div class="contact-links">
+          <a href="mailto:anmol.shami1@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            <span class="contact-link-val">anmol.shami1@gmail.com</span>
+          </a>
+          <a href="tel:+353894174441" class="contact-link">
+            <span class="contact-link-icon">☎</span>
+            <span class="contact-link-val">+353 894 174 441</span>
+          </a>
+          <a href="https://www.linkedin.com/in/anmol-shami" target="_blank" class="contact-link">
+            <span class="contact-link-icon">🔗</span>
+            <span class="contact-link-val">linkedin.com/in/anmol-shami</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-footer">
+      <span>© 2026 Anmol Shami &nbsp;·&nbsp; Dublin, Ireland 🇮🇪</span>
+      <span>Business Analyst &nbsp;·&nbsp; Available for Opportunities</span>
+    </div>
+
+  </div>
 </div>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-main">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <div class="hero-eyebrow-line"></div>
-        <span class="hero-eyebrow-text">Business Analyst · Dublin, Ireland</span>
-      </div>
-      <h1 class="hero-name">Anmol<br><em>Shami</em></h1>
-      <p class="hero-subtitle">Techno-Functional Consultant · CRM Expert · Project Manager</p>
-      <p class="hero-desc">4+ years delivering end-to-end CRM implementations, SaaS integrations, and process improvement across 20+ client engagements. Currently completing an MSc at Dublin City University.</p>
-      <div class="hero-cta">
-        <a href="#experience" class="btn-primary">View Experience &rarr;</a>
-        <a href="mailto:anmol.shami1@gmail.com" class="btn-ghost">Get In Touch</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-card">
-        <p class="hero-card-label">// at a glance</p>
-        <div class="stat-row">
-          <div class="stat-line"><div class="stat-val">4+</div><div class="stat-lbl">Years of Experience</div></div>
-          <div class="stat-line"><div class="stat-val">20+</div><div class="stat-lbl">Client Engagements</div></div>
-          <div class="stat-line"><div class="stat-val">6+</div><div class="stat-lbl">Full-Cycle CRM Projects</div></div>
-          <div class="stat-line"><div class="stat-val">10+</div><div class="stat-lbl">Team Members Led</div></div>
-          <div class="stat-line"><div class="stat-val">5</div><div class="stat-lbl">Recent Certifications</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-ticker">
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">Business Analysis</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">CRM Implementation</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">Process Improvement</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">Stakeholder Management</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">SaaS Platforms</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">Agile · Scrum</span></div>
-    <div class="ticker-item"><div class="ticker-dot"></div><span class="ticker-text">SQL · Python</span></div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="sec-head reveal">
-    <span class="sec-num">01</span>
-    <h2 class="sec-title">About</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>Business Analyst and Techno-Functional Consultant with 4+ years of hands-on experience delivering end-to-end CRM implementations, SaaS integrations, and process improvement initiatives across 20+ client engagements.</p>
-      <p>Specialised in translating ambiguous business requirements into structured functional solutions — bridging the gap between technical teams and business stakeholders. Comfortable owning full project cycles from requirements through go-live.</p>
-      <p>Currently completing a Master's in Business (Management) at Dublin City University, deepening strategic and analytical leadership capabilities. Actively seeking Business Analyst and Project Management roles in Dublin.</p>
-    </div>
-    <div class="about-aside reveal">
-      <div class="about-fact">
-        <div class="about-fact-icon">🎓</div>
-        <div class="about-fact-content">
-          <p class="about-fact-label">Currently Studying</p>
-          <p class="about-fact-val">MSc Business (Management) — Dublin City University</p>
-        </div>
-      </div>
-      <div class="about-fact">
-        <div class="about-fact-icon">📍</div>
-        <div class="about-fact-content">
-          <p class="about-fact-label">Based In</p>
-          <p class="about-fact-val">Dublin, Ireland</p>
-        </div>
-      </div>
-      <div class="about-fact">
-        <div class="about-fact-icon">🔍</div>
-        <div class="about-fact-content">
-          <p class="about-fact-label">Open To</p>
-          <p class="about-fact-val">Business Analyst · Project Manager · Techno-Functional roles</p>
-        </div>
-      </div>
-      <div class="about-fact">
-        <div class="about-fact-icon">💼</div>
-        <div class="about-fact-content">
-          <p class="about-fact-label">Core Expertise</p>
-          <p class="about-fact-val">SaaS Implementation &amp; Administration — CRM, Analytics, Project Tools</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="section section-alt" id="experience">
-  <div class="sec-head reveal">
-    <span class="sec-num">02</span>
-    <h2 class="sec-title">Experience</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="exp-wrap">
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <p class="exp-period">Aug 2024 – Aug 2025</p>
-        <p class="exp-co">Eventus Security Pvt. Ltd.</p>
-        <p class="exp-loc">India · 500+ employees</p>
-      </div>
-      <div class="exp-right">
-        <h3 class="exp-role">Techno-Functional Consultant <small style="font-size:.85rem;font-weight:400;color:var(--muted);font-style:italic">(Business Analyst &amp; Systems Lead)</small></h3>
-        <ul class="exp-bullets">
-          <li>Delivered end-to-end business analysis and process improvement across operations, HR, and client delivery functions.</li>
-          <li>Mapped and redesigned <strong>5+ core business workflows</strong> using BPMN-standard process mapping and gap analysis, achieving a measurable <strong>10% efficiency gain</strong>.</li>
-          <li>Created structured process documentation (SOPs, flow diagrams, handover guides) adopted across <strong>3 internal departments</strong>.</li>
-          <li>Identified and mitigated <strong>3 critical implementation risks</strong> during a SaaS platform rollout through proactive UAT coordination.</li>
-          <li>Extended native platform capabilities through low-code customisations, reducing reliance on external vendors.</li>
-          <li>Managed SaaS application administration for business-critical tools, maintaining <strong>99%+ uptime</strong>.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <p class="exp-period">Dec 2022 – Aug 2024</p>
-        <p class="exp-co">White Global LLC</p>
-        <p class="exp-loc">Atlanta, USA (Remote)</p>
-      </div>
-      <div class="exp-right">
-        <h3 class="exp-role">CRM Expert <small style="font-size:.85rem;font-weight:400;color:var(--muted);font-style:italic">(BA &amp; Implementation Lead)</small></h3>
-        <ul class="exp-bullets">
-          <li>Recognised SME for enterprise CRM platforms, delivering tailored solutions across retail, professional services, and logistics industries.</li>
-          <li>Led <strong>6+ full-cycle CRM implementation projects</strong> from BRD/FRD creation through configuration, UAT, and go-live — on time and within scope for all engagements.</li>
-          <li>Managed post-implementation support for <strong>6 concurrent clients</strong>, resolving escalations within agreed SLAs.</li>
-          <li>Trained and mentored <strong>4 junior consultants</strong>, establishing standardised guidelines that reduced rework by an estimated <strong>25%</strong>.</li>
-          <li>Produced client-facing documentation including process flows, user guides, and executive reports — directly supporting renewal discussions.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <p class="exp-period">Oct 2020 – Dec 2022</p>
-        <p class="exp-co">Value Score Business Solutions</p>
-        <p class="exp-loc">India</p>
-      </div>
-      <div class="exp-right">
-        <h3 class="exp-role">Consultant / Technical Lead / Project Manager</h3>
-        <ul class="exp-bullets">
-          <li>Led a cross-functional team of <strong>10+ technical staff</strong> across multiple concurrent client projects.</li>
-          <li>Managed delivery for <strong>14+ clients</strong> across IT consulting and SaaS implementation engagements.</li>
-          <li>Executed <strong>3 major IT modernisation initiatives</strong>, migrating legacy systems to cloud-based platforms.</li>
-          <li>Integrated <strong>8+ third-party applications</strong> via APIs and automation tools, enabling cross-platform data flow.</li>
-          <li>Provided Tier 1–3 technical support ensuring complete lifecycle maintenance and consistent client retention.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="section" id="skills">
-  <div class="sec-head reveal">
-    <span class="sec-num">03</span>
-    <h2 class="sec-title">Skills</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="skills-wrap reveal">
-    <table class="skills-table">
-      <tr>
-        <td><span class="sk-cat">Business Analysis</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">Requirements Elicitation</span><span class="sk-pill">BRD / FRD Creation</span><span class="sk-pill">Process Mapping (BPMN)</span><span class="sk-pill">User Stories</span><span class="sk-pill">UAT Planning &amp; Execution</span><span class="sk-pill">Gap Analysis</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="sk-cat">Project Management</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">Stakeholder Management</span><span class="sk-pill">Agile / Scrum</span><span class="sk-pill">Sprint Coordination</span><span class="sk-pill">Risk Identification</span><span class="sk-pill">Delivery Oversight</span><span class="sk-pill">Milestone Tracking</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="sk-cat">CRM &amp; SaaS</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">CRM Implementation</span><span class="sk-pill">SaaS Administration</span><span class="sk-pill">SaaS Lifecycle Mgmt</span><span class="sk-pill">Platform Configuration</span><span class="sk-pill">Post-Go-Live Support</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="sk-cat">Tools</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">Jira</span><span class="sk-pill">Confluence</span><span class="sk-pill">Lucidchart</span><span class="sk-pill">Draw.io</span><span class="sk-pill">MS Excel (Advanced)</span><span class="sk-pill">Power BI</span><span class="sk-pill">MS Office Suite</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="sk-cat">Technical</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">SQL</span><span class="sk-pill">Python (Pandas)</span><span class="sk-pill">API Integrations</span><span class="sk-pill">Low-Code Development</span><span class="sk-pill">Low-Code Scripting</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="sk-cat">Soft Skills</span></td>
-        <td><div class="sk-pills"><span class="sk-pill">Communication</span><span class="sk-pill">Leadership</span><span class="sk-pill">People Management</span><span class="sk-pill">Client Engagement</span><span class="sk-pill">Cross-Functional Collaboration</span></div></td>
-      </tr>
-    </table>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section class="section section-alt" id="certifications">
-  <div class="sec-head reveal">
-    <span class="sec-num">04</span>
-    <h2 class="sec-title">Certifications</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="cert-grid">
-    <div class="cert-card reveal">
-      <p class="cert-issuer">Kubicle · CPD Accredited · Feb 2026</p>
-      <p class="cert-name">Advanced Excel</p>
-      <p class="cert-meta">Chartered Accountants Ireland Approved · 9 CPD Credits</p>
-      <p class="cert-note">Formulas &amp; Functions, Lookups &amp; Database Functions, Pivot Tables, Data Manipulation &amp; Formatting.</p>
-    </div>
-    <div class="cert-card reveal">
-      <p class="cert-issuer">Kubicle · CPD Accredited · Feb 2026</p>
-      <p class="cert-name">Data Visualization &amp; Presentation</p>
-      <p class="cert-meta">Chartered Accountants Ireland Approved · 5.5 CPD Credits</p>
-      <p class="cert-note">Data Storytelling, Visual Data Thinking, Communicating Data Effectively, Visualization in Practice.</p>
-    </div>
-    <div class="cert-card reveal">
-      <p class="cert-issuer">LinkedIn Learning · PMI Accredited · Feb 2026</p>
-      <p class="cert-name">Modern Project Management in Microsoft 365</p>
-      <p class="cert-meta">2 PDUs</p>
-      <p class="cert-note">Project management practices within the Microsoft 365 ecosystem.</p>
-    </div>
-    <div class="cert-card reveal">
-      <p class="cert-issuer">LinkedIn Learning · NASBA CPE · Feb 2026</p>
-      <p class="cert-name">Consulting Foundations: Client Management &amp; Relationships</p>
-      <p class="cert-meta">1.4 CPE Credits</p>
-      <p class="cert-note">Client engagement frameworks and relationship management in consulting contexts.</p>
-    </div>
-    <div class="cert-card reveal">
-      <p class="cert-issuer">DCU · FutureLearn · Feb 2026</p>
-      <p class="cert-name">Business Ethics: An Introduction to Ethics for Business Leaders</p>
-      <p class="cert-meta">Dublin City University</p>
-      <p class="cert-note">Ethical frameworks and responsible leadership principles for business environments.</p>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section class="section" id="education">
-  <div class="sec-head reveal">
-    <span class="sec-num">05</span>
-    <h2 class="sec-title">Education</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="edu-wrap">
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <p class="edu-tag">Master's · Current</p>
-        <h3 class="edu-degree">MSc Business (Management)</h3>
-        <p class="edu-school">Dublin City University · Dublin, Ireland</p>
-        <p class="edu-period">Sep 2025 – Aug 2026 (Expected)</p>
-        <p class="edu-note">Relevant focus: Strategy, organisational management, data analytics (Python, SQL), and leadership.</p>
-        <div class="edu-glyph">🎓</div>
-      </div>
-      <div class="edu-card reveal">
-        <p class="edu-tag">Bachelor's Degree</p>
-        <h3 class="edu-degree">BSc Information Technology</h3>
-        <p class="edu-school">Amity University · Mumbai, India</p>
-        <p class="edu-period">2017 – 2020</p>
-        <div class="edu-glyph">📘</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section section-alt" id="contact">
-  <div class="contact-wrap">
-    <div class="reveal">
-      <h2 class="contact-title">Let's build<br><em>something.</em></h2>
-      <p class="contact-sub">Open to Business Analyst, Project Manager, and Techno-Functional roles in Dublin. Let's have a conversation.</p>
-    </div>
-    <div class="contact-strip reveal">
-      <a href="mailto:anmol.shami1@gmail.com" class="contact-item">
-        <span class="contact-item-icon">✉</span>
-        <span class="contact-item-label">Email</span>
-        <span class="contact-item-val">anmol.shami1@gmail.com</span>
-      </a>
-      <a href="tel:+353894174441" class="contact-item">
-        <span class="contact-item-icon">☎</span>
-        <span class="contact-item-label">Phone</span>
-        <span class="contact-item-val">+353 894 174 441</span>
-      </a>
-      <a href="https://www.linkedin.com/in/anmol-shami" target="_blank" class="contact-item">
-        <span class="contact-item-icon">🔗</span>
-        <span class="contact-item-label">LinkedIn</span>
-        <span class="contact-item-val">anmol-shami</span>
-      </a>
-      <div class="contact-item">
-        <span class="contact-item-icon">📍</span>
-        <span class="contact-item-label">Location</span>
-        <span class="contact-item-val">Dublin, Ireland</span>
-      </div>
-    </div>
-    <div class="reveal">
-      <a href="mailto:anmol.shami1@gmail.com" class="btn-primary" style="font-size:.75rem;padding:1rem 2.5rem">Send a Message &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span>&copy; 2026 Anmol Shami</span>
-  <span>Business Analyst &middot; Dublin, Ireland &middot; <span class="hl">Available for Opportunities</span></span>
-</footer>
 
 <script>
-// Cursor
-var cur = document.getElementById('cur');
-var curR = document.getElementById('curR');
-var mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', function(e) {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx+'px'; cur.style.top = my+'px';
-});
-(function loop() {
-  rx += (mx-rx)*0.13; ry += (my-ry)*0.13;
-  curR.style.left = rx+'px'; curR.style.top = ry+'px';
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a, button, .cert-card, .edu-card, .exp-item, .sk-pill').forEach(function(el) {
-  el.addEventListener('mouseenter', function() {
-    cur.style.transform = 'translate(-50%,-50%) scale(2.5)';
-    cur.style.background = '#e8503a';
-    curR.style.opacity = '0.7';
-    curR.style.width = '56px'; curR.style.height = '56px';
-  });
-  el.addEventListener('mouseleave', function() {
-    cur.style.transform = 'translate(-50%,-50%) scale(1)';
-    cur.style.background = 'var(--red)';
-    curR.style.opacity = '0.4';
-    curR.style.width = '32px'; curR.style.height = '32px';
+// Sidebar toggle
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('overlay');
+var hamburger = document.getElementById('hamburger');
+
+function toggleSidebar() {
+  var open = sidebar.classList.toggle('open');
+  overlay.classList.toggle('show', open);
+  hamburger.classList.toggle('open', open);
+}
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+  hamburger.classList.remove('open');
+}
+
+// Close sidebar on mobile nav click
+document.querySelectorAll('.sb-link').forEach(function(link) {
+  link.addEventListener('click', function() {
+    if (window.innerWidth <= 768) closeSidebar();
+    document.querySelectorAll('.sb-link').forEach(function(l){ l.classList.remove('active'); });
+    link.classList.add('active');
   });
 });
 
-// Nav scroll
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// Scroll reveal
+// Reveal on scroll
 var revealEls = document.querySelectorAll('.reveal');
 function checkReveal() {
   var wh = window.innerHeight;
   revealEls.forEach(function(el) {
-    var rect = el.getBoundingClientRect();
-    if (rect.top < wh - 40) {
+    if (el.getBoundingClientRect().top < wh - 30) {
       el.classList.add('visible');
     }
   });
 }
-window.addEventListener('scroll', checkReveal);
-window.addEventListener('load', checkReveal);
+window.addEventListener('scroll', checkReveal, { passive: true });
 document.addEventListener('DOMContentLoaded', checkReveal);
-// Also run immediately
+window.addEventListener('load', checkReveal);
 checkReveal();
 
-// Hamburger
-var hb = document.getElementById('hamburger');
-var mm = document.getElementById('mobMenu');
-var menuOpen = false;
-hb.addEventListener('click', function() {
-  menuOpen = !menuOpen;
-  hb.classList.toggle('open', menuOpen);
-  mm.classList.toggle('open', menuOpen);
-  document.body.style.overflow = menuOpen ? 'hidden' : '';
+// Active nav on scroll
+var sections = ['overview','experience','skills','certifications','education','contact'];
+var links = {};
+sections.forEach(function(id) {
+  links[id] = document.querySelector('.sb-link[href="#' + id + '"]');
 });
-function closeMob() {
-  menuOpen = false;
-  hb.classList.remove('open');
-  mm.classList.remove('open');
-  document.body.style.overflow = '';
-}
+window.addEventListener('scroll', function() {
+  var current = 'overview';
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) current = id;
+  });
+  sections.forEach(function(id) {
+    if (links[id]) links[id].classList.toggle('active', id === current);
+  });
+}, { passive: true });
 </script>
 </body>
 </html>
