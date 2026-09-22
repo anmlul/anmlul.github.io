@@ -2,859 +2,854 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anmol Shami</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anmol Shami | Business Systems Analyst, Dublin</title>
+<meta name="description" content="Business Systems Analyst in Dublin. CRM implementation, process automation, API integrations and data migration, from requirements to go-live.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:        #111111;
-  --ink-2:      #404040;
-  --muted:      #737373;
-  --white:      #ffffff;
-  --paper:      #F6F6F3;
-  --border:     #E0E0DC;
-  --green:      #15803D;
-  --green-l:    #DCFCE7;
-  --green-d:    #14532D;
-  --amber:      #92400E;
-  --amber-l:    #FEF3C7;
-  --blue:       #1D4ED8;
-  --blue-l:     #DBEAFE;
-  --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+:root{
+  --ink:#14213D;
+  --ink2:#3D4A63;
+  --mute:#6B7690;
+  --canvas:#F4F6FA;
+  --white:#FFFFFF;
+  --line:#D9DEE8;
+  --blue:#3346FF;
+  --blue-soft:#E8EBFF;
+  --amber:#FFB020;
+  --amber-soft:#FFF4DC;
+  --green:#1FA971;
+  --green-soft:#E3F6EE;
+  --sans:'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--canvas);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.container{max-width:1160px;margin:0 auto;padding:0 28px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--sans); background: var(--white); color: var(--ink); overflow-x: hidden; }
+/* Progress bar */
+.bar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;z-index:300}
 
-/* ─ Nav ─────────────────────────────────────── */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem; height: 56px;
-  background: rgba(17,17,17,0.96);
-  backdrop-filter: blur(8px);
-}
-.nav-brand { font-size: .9rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: -.01em; }
-.nav-brand sup { color: var(--green); font-size: .55rem; vertical-align: super; letter-spacing: .05em; font-weight: 600; }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.55); text-decoration: none; transition: color .15s; }
-.nav-links a:hover { color: var(--white); }
-.nav-cta {
-  font-size: .72rem; font-weight: 700; padding: .45rem 1.1rem;
-  background: var(--green); color: var(--white); text-decoration: none;
-  border-radius: 5px; transition: background .15s; letter-spacing: -.01em;
-}
-.nav-cta:hover { background: #166534; }
-.hb { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
-.hb span { display: block; width: 20px; height: 1.5px; background: var(--white); transition: transform .35s cubic-bezier(.23,1,.32,1), opacity .25s, width .25s; transform-origin: center; }
-.hb.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-.hb.open span:nth-child(2) { opacity: 0; width: 0; }
-.hb.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:66px;display:flex;align-items:center;background:rgba(244,246,250,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-color:var(--line)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{font-weight:800;font-size:1.05rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand-mark{width:26px;height:26px;position:relative;display:inline-block}
+.brand-mark::before{content:'';position:absolute;inset:5px;border:2px solid var(--blue);transform:rotate(45deg);border-radius:3px}
+.brand-mark::after{content:'';position:absolute;width:7px;height:7px;background:var(--amber);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink2);position:relative;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nav-links a:hover::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:9px;font-weight:700;font-size:.95rem;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.btn:active{transform:translateY(1px)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#2433D9}
+.btn-line{background:var(--white);border-color:var(--line);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+.nav .btn{padding:9px 16px;font-size:.88rem}
+.hb{display:none;width:40px;height:40px;background:none;border:none;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative;z-index:260}
+.hb span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .4s cubic-bezier(.23,1,.32,1),opacity .25s}
+.hb.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hb.open span:nth-child(2){opacity:0}
+.hb.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* Mobile menu */
-.mob {
-  position: fixed; inset: 0; background: var(--ink); z-index: 90;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
-  opacity: 0; pointer-events: none;
-  clip-path: circle(0% at calc(100% - 44px) 28px);
-  transition: clip-path .55s cubic-bezier(.77,0,.18,1), opacity .25s;
-}
-.mob.open { opacity: 1; pointer-events: all; clip-path: circle(150% at calc(100% - 44px) 28px); }
-.mob a {
-  font-size: 2rem; font-weight: 800; letter-spacing: -.03em;
-  color: rgba(255,255,255,.5); text-decoration: none;
-  opacity: 0; transform: translateY(16px);
-  transition: color .2s;
-}
-.mob a:hover { color: var(--white); }
-.mob.open a { animation: mIn .45s cubic-bezier(.23,1,.32,1) forwards; }
-.mob.open a:nth-child(1){animation-delay:.12s}
-.mob.open a:nth-child(2){animation-delay:.18s}
-.mob.open a:nth-child(3){animation-delay:.24s}
-.mob.open a:nth-child(4){animation-delay:.30s}
-.mob.open a:nth-child(5){animation-delay:.36s}
-@keyframes mIn { to { opacity:1; transform:translateY(0); } }
+.mob{position:fixed;inset:0;z-index:250;background:var(--white);display:flex;flex-direction:column;justify-content:center;padding:0 32px;gap:6px;visibility:hidden;clip-path:circle(0% at calc(100% - 48px) 33px);transition:clip-path .6s cubic-bezier(.77,0,.18,1),visibility 0s .6s}
+.mob.open{visibility:visible;clip-path:circle(150% at calc(100% - 48px) 33px);transition:clip-path .6s cubic-bezier(.77,0,.18,1),visibility 0s}
+.mob a{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;text-decoration:none;padding:6px 0;opacity:0;transform:translateY(18px);transition:opacity .4s,transform .4s,color .2s}
+.mob a:hover{color:var(--blue)}
+.mob.open a{opacity:1;transform:none}
+.mob.open a:nth-child(1){transition-delay:.15s}
+.mob.open a:nth-child(2){transition-delay:.21s}
+.mob.open a:nth-child(3){transition-delay:.27s}
+.mob.open a:nth-child(4){transition-delay:.33s}
+.mob.open a:nth-child(5){transition-delay:.39s}
+.mob-foot{margin-top:28px;font-size:.95rem;color:var(--mute);opacity:0;transition:opacity .4s .45s}
+.mob.open .mob-foot{opacity:1}
 
-/* ─ Hero (split) ────────────────────────────── */
-.hero {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: 55fr 45fr;
-  min-height: calc(100vh - 56px);
-}
-.hero-l {
-  background: var(--ink);
-  padding: 5rem 4rem 4rem;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.hero-l::after {
-  content: '';
-  position: absolute; right: 0; top: 20%; bottom: 20%;
-  width: 1px; background: rgba(255,255,255,.08);
-}
-.hero-avail {
-  display: inline-flex; align-items: center; gap: .5rem;
-  margin-bottom: 2rem;
-}
-.dot-pulse {
-  width: 7px; height: 7px; background: var(--green); border-radius: 50%;
-  animation: dp 2s ease infinite;
-}
-@keyframes dp { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-.avail-text { font-size: .72rem; font-weight: 600; color: var(--green); }
-.avail-sep { color: rgba(255,255,255,.2); font-size: .7rem; }
-.avail-loc { font-size: .72rem; color: rgba(255,255,255,.4); }
+/* Hero */
+.hero{position:relative;padding:140px 0 90px;background-image:radial-gradient(#C8CFDD 1px,transparent 1.2px);background-size:24px 24px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(var(--blue) 1.3px,transparent 1.5px);background-size:24px 24px;-webkit-mask-image:radial-gradient(240px circle at var(--mx,78%) var(--my,22%),#000 0%,transparent 70%);mask-image:radial-gradient(240px circle at var(--mx,78%) var(--my,22%),#000 0%,transparent 70%);opacity:.6;pointer-events:none}
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(to bottom,rgba(244,246,250,0),var(--canvas));pointer-events:none}
+.hero .container{position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:7px 16px 7px 12px;font-size:.88rem;font-weight:600;color:var(--ink2)}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--green);position:relative}
+.pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--green);animation:ring 2s ease-out infinite}
+@keyframes ring{from{transform:scale(.6);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.h1{font-size:clamp(2.7rem,6.6vw,5.6rem);font-weight:900;letter-spacing:-.045em;line-height:.98;margin:26px 0 30px}
+.h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.h1 .ln>span{display:inline-block;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+.h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes rise{from{transform:translateY(108%)}to{transform:none}}
+.ld{animation:up .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:52px}
+.hero-bio{font-size:1.12rem;line-height:1.65;color:var(--ink2);max-width:54ch}
+.hero-bio strong{color:var(--ink);font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero-name {
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
-  font-weight: 900;
-  letter-spacing: -.04em;
-  line-height: .93;
-  color: var(--white);
-  margin-bottom: 1.4rem;
-}
-.hero-title {
-  font-size: clamp(.85rem, 1.2vw, 1rem);
-  font-weight: 500;
-  color: rgba(255,255,255,.5);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-.hero-desc {
-  font-size: .85rem;
-  line-height: 1.8;
-  color: rgba(255,255,255,.55);
-  max-width: 440px;
-  margin-bottom: 2.5rem;
-}
-.hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
-.btn-g {
-  display: inline-flex; align-items: center; gap: .4rem;
-  padding: .65rem 1.4rem; font-size: .78rem; font-weight: 700;
-  background: var(--green); color: var(--white); text-decoration: none;
-  border-radius: 5px; letter-spacing: -.01em; transition: background .15s;
-}
-.btn-g:hover { background: #166534; }
-.btn-w {
-  display: inline-flex; align-items: center; gap: .4rem;
-  padding: .65rem 1.4rem; font-size: .78rem; font-weight: 700;
-  background: rgba(255,255,255,.08); color: rgba(255,255,255,.7);
-  text-decoration: none; border-radius: 5px; letter-spacing: -.01em;
-  transition: background .15s;
-}
-.btn-w:hover { background: rgba(255,255,255,.14); }
+/* Process canvas */
+.canvas{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:26px 30px 30px;box-shadow:0 30px 60px -40px rgba(20,33,61,.35)}
+.canvas-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.canvas-title{font-weight:700;font-size:1rem}
+.canvas-status{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--ink2);min-height:1.6em}
+.canvas-status::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--amber);flex-shrink:0}
+.flow-wrap{position:relative;padding:34px 0 92px}
+.flow{display:flex;align-items:center}
+.flow>*{position:relative;z-index:2}
+.task{flex:0 0 auto;width:clamp(112px,12.5vw,158px);border:1.5px solid var(--line);border-radius:12px;background:var(--white);padding:14px 14px 13px;transition:border-color .35s,background .35s,box-shadow .35s,transform .35s}
+.task b{display:block;font-size:.93rem;font-weight:700;line-height:1.25;margin-bottom:4px}
+.task small{display:block;font-size:.78rem;color:var(--mute);line-height:1.35}
+.task.vis{border-color:#AEB8FF}
+.task.act{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 5px rgba(51,70,255,.12);transform:translateY(-3px)}
+.arr{flex:1 1 18px;min-width:14px;height:2px;background:var(--line);align-self:center;z-index:1!important}
+.arr::after{content:'';position:absolute;right:-1px;top:-4px;border-left:8px solid var(--line);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.ev{flex:0 0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--white);transition:border-color .35s,background .35s,box-shadow .35s}
+.ev.start{width:30px;height:30px;border:2px solid var(--ink2)}
+.ev.start.act{border-color:var(--blue);box-shadow:0 0 0 5px rgba(51,70,255,.12)}
+.ev.end{width:52px;height:52px;border:4px solid var(--ink);font-size:.72rem;font-weight:800}
+.ev.end.act{border-color:var(--green);background:var(--green-soft);color:#11774F;box-shadow:0 0 0 6px rgba(31,169,113,.15)}
+.gw{flex:0 0 auto;width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+.gw::before{content:'';position:absolute;inset:8px;border:2px solid var(--ink2);background:var(--white);transform:rotate(45deg);border-radius:4px;transition:border-color .35s,background .35s}
+.gw-in{position:relative;z-index:1;font-weight:800;font-size:.95rem}
+.gw-label{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);white-space:nowrap;font-style:normal;font-size:.78rem;color:var(--mute);font-weight:600}
+.gw.act::before{border-color:var(--blue);background:var(--blue-soft)}
+.gw.fail::before{border-color:#E8890C;background:var(--amber-soft)}
+.gw.pass::before{border-color:var(--green);background:var(--green-soft)}
+.loop{position:absolute;display:none;border:2px solid var(--line);border-top:none;border-radius:0 0 14px 14px;z-index:1;transition:border-color .35s}
+.loop::before{content:'';position:absolute;left:-7px;top:var(--ah,0px);border-bottom:8px solid var(--line);border-left:5px solid transparent;border-right:5px solid transparent;transition:border-color .35s}
+.loop span{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--mute);font-weight:600;transition:color .35s}
+.loop.act{border-color:#F2B45A}
+.loop.act::before{border-bottom-color:#F2B45A}
+.loop.act span{color:#B86A00}
+.token{position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--amber);border:3px solid var(--white);box-shadow:0 2px 10px rgba(255,176,32,.6);z-index:5;pointer-events:none;transition:transform .85s cubic-bezier(.65,0,.35,1),opacity .3s}
+.token::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--amber);animation:ring 1.6s ease-out infinite}
+.token.jump{transition:none;opacity:0}
 
-.hero-stamp {
-  margin-top: 2rem; padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,.08);
-  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
-}
-.stamp-badge {
-  display: inline-flex; align-items: center; gap: .45rem;
-  background: rgba(29,78,216,.18); border: 1px solid rgba(29,78,216,.3);
-  border-radius: 5px; padding: .35rem .75rem;
-}
-.stamp-badge-text { font-size: .65rem; font-weight: 700; color: #93c5fd; line-height: 1.3; }
-.stamp-badge-sub { font-size: .6rem; color: #60a5fa; display: block; font-weight: 400; }
-.stamp-note { font-size: .65rem; color: rgba(255,255,255,.3); line-height: 1.5; max-width: 260px; }
+/* Sections */
+.sec{padding:110px 0}
+.sec-white{background:var(--white)}
+.sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-.035em;line-height:1.04;max-width:18ch}
+.sec-lead{font-size:1.08rem;color:var(--ink2);max-width:58ch;margin-top:16px}
+.sec-head{margin-bottom:56px}
 
-/* Hero right */
-.hero-r {
-  background: var(--paper);
-  padding: 4rem 3.5rem;
-  display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
-}
-.feat-label {
-  font-size: .65rem; font-weight: 700; color: var(--muted);
-  letter-spacing: .04em; margin-bottom: -.25rem;
-}
-.feat-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  position: relative; overflow: hidden;
-}
-.feat-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--amber) 0%, #f59e0b 100%);
-}
-.time-badge {
-  display: inline-flex; align-items: center; gap: .4rem;
-  background: var(--amber-l); border: 1px solid rgba(146,64,14,.2);
-  border-radius: 4px; padding: .25rem .6rem;
-  font-size: .6rem; font-weight: 800; color: var(--amber);
-  letter-spacing: .04em; margin-bottom: .9rem;
-}
-.feat-title { font-size: .95rem; font-weight: 800; color: var(--ink); margin-bottom: .3rem; letter-spacing: -.02em; }
-.feat-sub { font-size: .72rem; color: var(--muted); margin-bottom: .75rem; line-height: 1.5; }
-.feat-pills { display: flex; flex-wrap: wrap; gap: .35rem; }
-.fpill {
-  font-size: .62rem; font-weight: 600; padding: .2rem .55rem;
-  background: var(--paper); border: 1px solid var(--border);
-  border-radius: 4px; color: var(--ink-2);
-}
+/* Reveal */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
 
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
-.stat-box {
-  background: var(--white); border: 1px solid var(--border); border-radius: 8px;
-  padding: 1rem 1.1rem;
-}
-.stat-n { font-size: 2rem; font-weight: 900; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
-.stat-n.g { color: var(--green); }
-.stat-d { font-size: .65rem; color: var(--muted); margin-top: .2rem; font-weight: 500; }
+/* Numbers */
+.nums{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.num{padding:34px 24px 32px;border-left:1px solid var(--line)}
+.num:first-child{border-left:none;padding-left:0}
+.num b{display:block;font-size:clamp(2.4rem,4.6vw,3.7rem);font-weight:900;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.num span{display:block;margin-top:10px;font-size:.93rem;color:var(--ink2);line-height:1.45;max-width:22ch}
 
-/* ─ Stats strip ─────────────────────────────── */
-.strip {
-  background: var(--ink);
-  display: flex; align-items: stretch;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.strip-item {
-  flex: 1; padding: 2rem 2.5rem;
-  border-right: 1px solid rgba(255,255,255,.06);
-}
-.strip-item:last-child { border-right: none; }
-.strip-n { font-size: 2.6rem; font-weight: 900; letter-spacing: -.05em; color: var(--white); line-height: 1; margin-bottom: .35rem; }
-.strip-n span { color: var(--green); }
-.strip-d { font-size: .72rem; color: rgba(255,255,255,.4); font-weight: 500; line-height: 1.4; }
+/* Marquee */
+.mq{overflow:hidden;padding:26px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;width:max-content;animation:slide 48s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+.mq-item{display:flex;align-items:center;gap:22px;padding-right:22px;white-space:nowrap;font-size:1.15rem;font-weight:700;color:var(--ink2)}
+.mq-item::after{content:'';width:9px;height:9px;border:2px solid var(--blue);transform:rotate(45deg);border-radius:2px}
+@keyframes slide{to{transform:translateX(-50%)}}
+.mq-cap{font-size:.95rem;color:var(--mute);margin-top:48px}
 
-/* ─ Sections ─────────────────────────────────── */
-.wrap { max-width: 1080px; margin: 0 auto; padding: 5rem 2.5rem; }
-.wrap-alt { background: var(--paper); }
+/* Experience tabs */
+.xp{display:grid;grid-template-columns:290px 1fr;gap:56px;align-items:start}
+.xp-tabs{position:relative;display:flex;flex-direction:column;border-left:1px solid var(--line)}
+.xp-tab{background:none;border:none;text-align:left;font-family:inherit;cursor:pointer;padding:18px 22px;color:var(--mute);transition:color .25s,background .25s}
+.xp-tab:hover{color:var(--ink);background:rgba(51,70,255,.04)}
+.xp-tab strong{display:block;font-size:1.02rem;font-weight:700;letter-spacing:-.01em}
+.xp-tab span{display:block;font-size:.85rem;margin-top:2px}
+.xp-tab.on{color:var(--ink)}
+.xp-ind{position:absolute;left:-1px;top:0;width:3px;height:0;background:var(--blue);border-radius:3px;transition:top .45s cubic-bezier(.65,0,.35,1),left .45s cubic-bezier(.65,0,.35,1),width .45s cubic-bezier(.65,0,.35,1),height .45s cubic-bezier(.65,0,.35,1)}
+.no-js .xp-ind,html:not(.js) .xp-ind{display:none}
+.xp-panel+.xp-panel{margin-top:64px}
+.js .xp-panel{display:none;margin-top:0}
+.js .xp-panel.on{display:block;animation:panel .55s cubic-bezier(.2,.8,.2,1) both}
+@keyframes panel{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.xp-role{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.xp-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin:10px 0 22px;font-size:.93rem;color:var(--mute)}
+.xp-meta span{display:inline-flex;align-items:center;gap:7px}
+.xp-meta svg{width:15px;height:15px;stroke:var(--mute);fill:none;stroke-width:1.7}
+.xp-context{font-size:1.1rem;color:var(--ink);font-weight:500;line-height:1.55;padding:16px 20px;background:var(--blue-soft);border-radius:12px;margin-bottom:24px;max-width:62ch}
+.xp-list{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:66ch}
+.xp-list li{position:relative;padding-left:24px;color:var(--ink2);line-height:1.65}
+.xp-list li::before{content:'';position:absolute;left:2px;top:.62em;width:8px;height:8px;border:2px solid var(--blue);transform:rotate(45deg);border-radius:2px}
+.xp-list strong{color:var(--ink);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-size:.84rem;font-weight:600;padding:6px 12px;border-radius:7px;background:var(--canvas);border:1px solid var(--line);color:var(--ink2);transition:border-color .2s,color .2s,background .2s}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.key{background:var(--blue-soft);border-color:#C5CCFF;color:#2330C9}
 
-.sh {
-  display: flex; align-items: baseline; gap: 1rem;
-  margin-bottom: 3rem; padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-.sh-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -.03em; color: var(--ink); }
-.sh-aside { font-size: .72rem; color: var(--muted); font-weight: 500; margin-left: auto; }
+/* Case notes */
+.cases{border-top:1px solid var(--line)}
+.case{display:grid;grid-template-columns:180px 1fr 90px 1fr;gap:28px;align-items:start;padding:38px 0;border-bottom:1px solid var(--line)}
+.case-where{font-size:.9rem;color:var(--mute);font-weight:600;padding-top:4px}
+.case-tag{display:block;font-size:.8rem;font-weight:700;margin-bottom:6px}
+.case-tag.p{color:#B86A00}
+.case-tag.f{color:var(--blue)}
+.case h3{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-bottom:8px}
+.case p{color:var(--ink2);line-height:1.6}
+.case-fix p{color:var(--ink)}
+.case-link{position:relative;height:2px;margin-top:40px;background:transparent}
+.case-link::before{content:'';position:absolute;left:0;top:0;height:2px;width:100%;background:var(--line);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.65,0,.35,1) .25s}
+.case-link::after{content:'';position:absolute;top:-6px;left:0;width:14px;height:14px;border-radius:50%;background:var(--amber);border:3px solid var(--canvas);transition:left .9s cubic-bezier(.65,0,.35,1) .25s}
+.rv.in .case-link::before,html:not(.js) .case-link::before{transform:scaleX(1)}
+.rv.in .case-link::after,html:not(.js) .case-link::after{left:calc(100% - 14px)}
 
-/* ─ Experience ───────────────────────────────── */
-.exp-list { display: flex; flex-direction: column; }
-.exp-item {
-  display: grid; grid-template-columns: 220px 1fr;
-  gap: 0 3rem; padding: 2.5rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: background .15s;
-}
-.exp-item:last-child { border-bottom: none; }
-.exp-co-abbr {
-  width: 38px; height: 38px; border-radius: 8px;
-  background: var(--ink); color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .65rem; font-weight: 800; letter-spacing: -.01em;
-  flex-shrink: 0; margin-bottom: .75rem;
-}
-.exp-co-abbr.g { background: var(--green); }
-.exp-co-abbr.r { background: #b91c1c; }
-.exp-period { font-size: .65rem; color: var(--muted); font-weight: 600; margin-bottom: .25rem; }
-.exp-co { font-size: .78rem; font-weight: 700; color: var(--ink); margin-bottom: .15rem; }
-.exp-where { font-size: .65rem; color: var(--muted); }
-.exp-role { font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; color: var(--ink); margin-bottom: .2rem; }
-.exp-role-sub { font-size: .75rem; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
-.exp-bul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
-.exp-bul li { font-size: .8rem; line-height: 1.75; color: var(--ink-2); padding-left: 1.1rem; position: relative; }
-.exp-bul li::before { content: ''; position: absolute; left: 0; top: .65rem; width: 5px; height: 1px; background: var(--green); }
-.exp-bul li strong { color: var(--ink); font-weight: 700; }
-.exp-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .9rem; }
-.etag {
-  font-size: .62rem; font-weight: 600; padding: .18rem .55rem;
-  background: var(--paper); border: 1px solid var(--border);
-  border-radius: 4px; color: var(--muted);
-}
+/* Projects */
+.proj{display:grid;grid-template-columns:1.35fr 1fr;gap:24px}
+.proj-a{background:var(--ink);color:#fff;border-radius:20px;padding:40px;position:relative;overflow:hidden}
+.proj-a::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.2px);background-size:22px 22px}
+.proj-a>*{position:relative}
+.proj-big{font-size:clamp(4.5rem,9vw,7.5rem);font-weight:900;letter-spacing:-.06em;line-height:.9;color:var(--amber)}
+.proj-big-cap{font-size:1rem;color:rgba(255,255,255,.7);margin:8px 0 32px}
+.proj h3{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;margin-bottom:6px}
+.proj-when{font-size:.9rem;margin-bottom:16px}
+.proj-a .proj-when{color:rgba(255,255,255,.55)}
+.proj-a p{color:rgba(255,255,255,.82);line-height:1.65}
+.proj-a .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.85)}
+.proj-b{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:40px;display:flex;flex-direction:column}
+.proj-b .proj-when{color:var(--mute)}
+.proj-b p{color:var(--ink2);line-height:1.65}
+.bars{display:flex;align-items:flex-end;gap:7px;height:110px;margin:0 0 30px}
+.bars i{flex:1;background:var(--blue-soft);border-radius:5px 5px 0 0;height:var(--h);transform:scaleY(0);transform-origin:bottom;transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.bars i:nth-child(5),.bars i:nth-child(8){background:var(--blue)}
+.rv.in .bars i,html:not(.js) .bars i{transform:scaleY(1)}
 
-/* ─ Projects ─────────────────────────────────── */
-.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-.proj-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-  padding: 2rem; position: relative; overflow: hidden;
-  transition: border-color .2s, box-shadow .2s;
-}
-.proj-card:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,128,61,.06); }
-.proj-card.feat::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--amber), #fbbf24);
-}
-.proj-flag {
-  display: inline-flex; align-items: center; gap: .4rem; margin-bottom: .85rem;
-  padding: .2rem .6rem; border-radius: 4px;
-  font-size: .6rem; font-weight: 800; letter-spacing: .03em;
-}
-.proj-flag.amber { background: var(--amber-l); color: var(--amber); border: 1px solid rgba(146,64,14,.15); }
-.proj-flag.green { background: var(--green-l); color: var(--green-d); border: 1px solid rgba(21,128,61,.15); }
-.proj-title { font-size: 1rem; font-weight: 800; letter-spacing: -.02em; color: var(--ink); margin-bottom: .3rem; }
-.proj-client { font-size: .72rem; color: var(--muted); margin-bottom: .85rem; font-weight: 500; }
-.proj-bul { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
-.proj-bul li { font-size: .78rem; line-height: 1.7; color: var(--ink-2); padding-left: 1rem; position: relative; }
-.proj-bul li::before { content: ''; position: absolute; left: 0; top: .65rem; width: 5px; height: 1px; background: var(--green); }
-.proj-bul li strong { color: var(--ink); font-weight: 700; }
-.proj-stack { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; border-top: 1px solid var(--border); padding-top: .9rem; }
+/* Skills */
+.skills{border-top:1px solid var(--line)}
+.sk-row{display:grid;grid-template-columns:230px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--line)}
+.sk-row h3{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;padding-top:5px}
+.sk-row .chips{margin-top:0}
 
-/* ─ Skills ───────────────────────────────────── */
-.skill-rows { display: flex; flex-direction: column; gap: 0; }
-.skill-row {
-  display: grid; grid-template-columns: 180px 1fr;
-  gap: 0 2rem; padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border); align-items: start;
-}
-.skill-row:first-child { border-top: 1px solid var(--border); }
-.skill-cat { font-size: .75rem; font-weight: 700; color: var(--ink); padding-top: .1rem; }
-.skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-.stag {
-  font-size: .72rem; font-weight: 500; padding: .3rem .7rem;
-  background: var(--white); border: 1px solid var(--border); border-radius: 5px;
-  color: var(--ink-2); transition: border-color .15s, color .15s;
-}
-.stag:hover { border-color: var(--green); color: var(--green-d); }
-.stag.hi { background: var(--green-l); border-color: rgba(21,128,61,.25); color: var(--green-d); }
+/* Education + certs */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.list-title{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.li-row{padding:20px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+.li-row strong{display:block;font-weight:700;line-height:1.35}
+.li-row small{display:block;color:var(--mute);font-size:.9rem;margin-top:3px}
+.li-right{font-size:.88rem;color:var(--mute);white-space:nowrap;text-align:right}
+.badge-ip{font-size:.78rem;font-weight:700;color:#B86A00;background:var(--amber-soft);padding:4px 10px;border-radius:999px;white-space:nowrap}
 
-/* ─ Certifications ───────────────────────────── */
-.cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
-.cert-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 1rem 1.25rem; background: var(--white);
-  border: 1px solid var(--border); border-radius: 8px;
-  transition: border-color .15s;
-}
-.cert-row:hover { border-color: var(--green); }
-.cert-name { font-size: .78rem; font-weight: 700; color: var(--ink); margin-bottom: .15rem; }
-.cert-from { font-size: .63rem; color: var(--muted); }
-.cbadge {
-  font-size: .55rem; font-weight: 800; padding: .18rem .5rem;
-  border-radius: 4px; white-space: nowrap; letter-spacing: .03em; flex-shrink: 0;
-}
-.cbadge.cpd { background: var(--green-l); color: var(--green-d); }
-.cbadge.pmi { background: #eff6ff; color: #1e40af; }
-.cbadge.ll  { background: var(--paper); color: var(--muted); border: 1px solid var(--border); }
-.cbadge.dcu { background: #fdf4ff; color: #7e22ce; }
-.cbadge.ip  { background: #fff7ed; color: #c2410c; border: 1px solid rgba(194,65,12,.2); }
-.cert-ip {
-  grid-column: 1 / -1;
-  border-style: dashed; border-color: rgba(194,65,12,.3);
-  background: #fff7ed;
-}
+/* Contact */
+.contact{background:var(--ink);color:#fff;padding:120px 0 110px;position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;width:620px;height:620px;right:-180px;top:-240px;background:radial-gradient(circle,rgba(51,70,255,.45),transparent 65%);pointer-events:none}
+.contact .container{position:relative}
+.contact h2{font-size:clamp(2.3rem,5.6vw,4.6rem);font-weight:900;letter-spacing:-.045em;line-height:1;max-width:15ch}
+.contact-lead{font-size:1.12rem;color:rgba(255,255,255,.72);margin:22px 0 40px;max-width:52ch}
+.copy{display:inline-flex;align-items:center;gap:22px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:18px 20px 18px 26px;color:#fff;font-family:inherit;cursor:pointer;transition:border-color .25s,background .25s;max-width:100%}
+.copy:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.1)}
+.copy-txt{font-size:clamp(1.05rem,2.4vw,1.4rem);font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere;text-align:left}
+.copy-state{font-size:.85rem;font-weight:700;padding:8px 14px;border-radius:9px;background:#fff;color:var(--ink);white-space:nowrap;transition:background .25s,color .25s}
+.copy.ok .copy-state{background:var(--green);color:#fff;animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.1)}}
+.contact-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:18px}
+.contact .btn-line{background:transparent;border-color:rgba(255,255,255,.25);color:#fff}
+.contact .btn-line:hover{border-color:#fff}
+.stamp{display:inline-flex;align-items:center;gap:10px;margin-top:40px;font-size:.95rem;color:rgba(255,255,255,.8)}
+footer{background:#0E1830;color:rgba(255,255,255,.5);font-size:.88rem;padding:26px 0}
+footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-/* ─ Education ────────────────────────────────── */
-.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-.edu-card {
-  border: 1px solid var(--border); border-radius: 10px; padding: 2rem;
-  background: var(--white); transition: border-color .15s;
+/* Responsive */
+@media (max-width:1020px){
+  .nums{grid-template-columns:repeat(3,1fr)}
+  .num:nth-child(4){border-left:none;padding-left:0}
+  .num:nth-child(n+4){border-top:1px solid var(--line)}
+  .case{grid-template-columns:1fr 70px 1fr}
+  .case-where{grid-column:1/-1;padding-top:0}
 }
-.edu-card:hover { border-color: var(--green); }
-.edu-tag {
-  display: inline-block; font-size: .6rem; font-weight: 700;
-  padding: .18rem .55rem; border-radius: 4px; margin-bottom: .75rem;
+@media (max-width:860px){
+  .nav-links,.nav .btn{display:none}
+  .hb{display:flex}
+  .hero{padding:118px 0 70px}
+  .hero-row{margin-bottom:40px}
+  .canvas{padding:22px 20px 26px}
+  .flow-wrap{padding:6px 0 4px}
+  .flow{flex-direction:column;align-items:stretch}
+  .task{width:100%}
+  .arr{flex:0 0 26px;width:2px;min-width:0;height:26px;align-self:center}
+  .arr::after{right:auto;top:auto;left:-4px;bottom:-1px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--line);border-bottom:0}
+  .ev,.gw{align-self:center}
+  .gw-label{bottom:auto;top:50%;left:calc(100% + 10px);transform:translateY(-50%)}
+  .xp{grid-template-columns:1fr;gap:28px}
+  .xp-tabs{flex-direction:row;overflow-x:auto;border-left:none;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .xp-tabs::-webkit-scrollbar{display:none}
+  .xp-tab{flex:0 0 auto;padding:14px 18px}
+  .proj{grid-template-columns:1fr}
+  .sk-row{grid-template-columns:1fr;gap:12px}
+  .two{grid-template-columns:1fr;gap:56px}
+  .sec{padding:84px 0}
 }
-.edu-tag.cur { background: var(--green-l); color: var(--green-d); }
-.edu-tag.done { background: var(--paper); color: var(--muted); border: 1px solid var(--border); }
-.edu-deg { font-size: .95rem; font-weight: 800; letter-spacing: -.02em; color: var(--ink); margin-bottom: .25rem; }
-.edu-uni { font-size: .75rem; color: var(--muted); font-weight: 500; margin-bottom: .65rem; }
-.edu-note { font-size: .72rem; color: var(--ink-2); line-height: 1.65; border-top: 1px solid var(--border); padding-top: .65rem; margin-top: .65rem; }
-
-/* ─ Contact ──────────────────────────────────── */
-.contact-band {
-  background: var(--ink); padding: 5rem 2.5rem;
+@media (max-width:640px){
+  .container{padding:0 20px}
+  .nums{grid-template-columns:1fr 1fr}
+  .num{padding:26px 16px 24px}
+  .num:nth-child(odd){border-left:none;padding-left:0}
+  .num:nth-child(4){border-left:1px solid var(--line);padding-left:16px}
+  .num:nth-child(n+3){border-top:1px solid var(--line)}
+  .num:nth-child(5){grid-column:1/-1}
+  .case{grid-template-columns:1fr;gap:14px}
+  .case-link{display:none}
+  .proj-a,.proj-b{padding:30px 24px}
+  .copy{flex-direction:column;align-items:flex-start;gap:14px;width:100%}
+  .li-row{flex-direction:column;gap:6px}
+  .li-right{text-align:left}
 }
-.contact-inner { max-width: 1080px; margin: 0 auto; }
-.contact-h {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 900; letter-spacing: -.04em; line-height: 1;
-  color: var(--white); margin-bottom: .75rem;
-}
-.contact-h span { color: var(--green); }
-.contact-sub { font-size: .85rem; color: rgba(255,255,255,.45); margin-bottom: 1.5rem; line-height: 1.7; max-width: 500px; }
-.stamp-strip {
-  display: inline-flex; align-items: center; gap: .6rem;
-  background: rgba(29,78,216,.15); border: 1px solid rgba(29,78,216,.25);
-  border-radius: 6px; padding: .6rem 1rem; margin-bottom: 2.5rem;
-}
-.stamp-strip-text { font-size: .68rem; font-weight: 700; color: #93c5fd; line-height: 1.3; }
-.stamp-strip-sub { font-size: .6rem; color: #60a5fa; font-weight: 400; }
-.contact-links { display: flex; flex-wrap: wrap; gap: .75rem; }
-.clink {
-  display: flex; align-items: center; gap: .6rem; padding: .7rem 1.25rem;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-  border-radius: 7px; text-decoration: none; transition: background .15s, border-color .15s;
-}
-.clink:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
-.clink-icon { font-size: .9rem; }
-.clink-val { font-size: .75rem; font-weight: 600; color: var(--white); }
-
-/* ─ Footer ───────────────────────────────────── */
-footer {
-  background: #0a0a0a; padding: 1.5rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: .65rem; color: rgba(255,255,255,.3);
-  border-top: 1px solid rgba(255,255,255,.05);
-}
-footer span { color: var(--green); }
-
-/* ─ Responsive ───────────────────────────────── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-r { display: none; }
-  .hero-l { padding: 3.5rem 2rem; min-height: calc(100vh - 56px); }
-  .strip { flex-wrap: wrap; }
-  .strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); padding: 1.5rem 2rem; min-width: 50%; }
-  .exp-item { grid-template-columns: 1fr; gap: .75rem; }
-  .exp-left { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-  .exp-co-abbr { margin-bottom: 0; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .skill-row { grid-template-columns: 1fr; gap: .6rem; }
-  .cert-grid { grid-template-columns: 1fr; }
-  .edu-grid { grid-template-columns: 1fr; }
-  .nav-links, .nav-cta { display: none; }
-  .hb { display: flex; }
-  .wrap { padding: 3.5rem 1.5rem; }
-  footer { flex-direction: column; gap: .4rem; text-align: center; }
-}
-@media (max-width: 580px) {
-  .hero-name { font-size: 2.6rem; }
-  .strip-item { min-width: 100%; }
-  .contact-band { padding: 3.5rem 1.5rem; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav class="nav">
-  <a href="#" class="nav-brand">Anmol Shami <sup>Dublin</sup></a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:anmol.shami1@gmail.com" class="nav-cta" style="display:none" id="navCta">Hire Me</a>
-  <button class="hb" id="hb" onclick="toggleMob()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+<div class="bar" id="bar"></div>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#top" class="brand"><span class="brand-mark" aria-hidden="true"></span>Anmol Shami</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#cases">Case notes</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+    <a href="mailto:anmol.shami1@gmail.com" class="btn btn-blue">Email me</a>
+    <button class="hb" id="hb" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
-<!-- Mobile menu -->
 <div class="mob" id="mob">
-  <a href="#work" onclick="closeMob()">Work</a>
-  <a href="#projects" onclick="closeMob()">Projects</a>
-  <a href="#skills" onclick="closeMob()">Skills</a>
-  <a href="#certifications" onclick="closeMob()">Certifications</a>
-  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="#work">Work</a>
+  <a href="#cases">Case notes</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+  <p class="mob-foot">anmol.shami1@gmail.com</p>
 </div>
 
 <!-- Hero -->
-<div class="hero">
-  <div class="hero-l">
-    <div class="hero-avail">
-      <div class="dot-pulse"></div>
-      <span class="avail-text">Available for work</span>
-      <span class="avail-sep">·</span>
-      <span class="avail-loc">Dublin, Ireland 🇮🇪</span>
+<header class="hero" id="top">
+  <div class="container">
+    <span class="pill ld" style="--d:.05s"><span class="pulse"></span>Stamp 1G, eligible for full-time work in Ireland</span>
+
+    <h1 class="h1"><span class="ln"><span>I write the spec.</span></span><span class="ln"><span>Then I build the system.</span></span></h1>
+
+    <div class="hero-row">
+      <p class="hero-bio ld" style="--d:.3s"><strong>Business Systems Analyst in Dublin.</strong> For 4+ years I have taken CRM and business systems projects from the first requirements workshop to go-live, often as the only analyst and developer on the project, for 14+ clients in India and the US.</p>
+      <div class="hero-cta ld" style="--d:.4s">
+        <a href="#work" class="btn btn-blue">See my work</a>
+        <a href="https://linkedin.com/in/anmol-shami" target="_blank" rel="noopener" class="btn btn-line">LinkedIn</a>
+      </div>
     </div>
 
-    <h1 class="hero-name">Anmol<br>Shami</h1>
-
-    <p class="hero-title">Techno-Functional Business Analyst &nbsp;·&nbsp; CRM &amp; SaaS Implementation &nbsp;·&nbsp; Data-Driven Consulting</p>
-
-    <p class="hero-desc">4+ years bridging CRM implementation and business stakeholder needs. Zoho developer with strong business analysis fundamentals — requirements elicitation, process mapping, and stakeholder management — backed by an MSc at Dublin City University.</p>
-
-    <div class="hero-btns">
-      <a href="#work" class="btn-g">View Experience</a>
-      <a href="mailto:anmol.shami1@gmail.com" class="btn-w">Get in Touch</a>
-    </div>
-
-    <div class="hero-stamp">
-      <div class="stamp-badge">
-        <span style="font-size:.8rem">🛂</span>
-        <div>
-          <div class="stamp-badge-text">Stamp 1G &nbsp;·&nbsp; Work Authorised</div>
-          <span class="stamp-badge-sub">No employer sponsorship required</span>
+    <div class="canvas ld" style="--d:.55s">
+      <div class="canvas-head">
+        <p class="canvas-title">How a project moves through my hands</p>
+        <p class="canvas-status" id="flowStatus" aria-live="polite">A new request comes in</p>
+      </div>
+      <div class="flow-wrap" id="flowWrap">
+        <div class="flow">
+          <div class="ev start" data-k="start"><span class="sr">Start</span></div>
+          <i class="arr"></i>
+          <div class="task" data-k="req"><b>Requirements workshop</b><small>Elicitation and user stories</small></div>
+          <i class="arr"></i>
+          <div class="task" data-k="spec"><b>Spec and sign-off</b><small>BRD/FRD, data dictionary</small></div>
+          <i class="arr"></i>
+          <div class="task" data-k="build"><b>Build</b><small>Deluge, APIs, automation</small></div>
+          <i class="arr"></i>
+          <div class="task" data-k="uat"><b>UAT</b><small>Structured test cycles</small></div>
+          <i class="arr"></i>
+          <div class="gw" data-k="gw"><span class="gw-in" id="gwIn">?</span><em class="gw-label">Passed?</em></div>
+          <i class="arr"></i>
+          <div class="ev end" data-k="end">Live</div>
         </div>
-      </div>
-      <p class="stamp-note">Transitioning from Stamp 2 → Stamp 1G via Irish Third Level Graduate Scheme. Full-time auth expected Q4 2026.</p>
-    </div>
-  </div>
-
-  <div class="hero-r">
-    <p class="feat-label">Featured project</p>
-    <div class="feat-card">
-      <div class="time-badge">🏆 TIME Best Inventions 2024</div>
-      <p class="feat-title">BackAware Belt</p>
-      <p class="feat-sub">Applied Consultancy Project · MSc Business, DCU · 2026</p>
-      <p style="font-size:.78rem;color:var(--ink-2);line-height:1.7;margin-bottom:.75rem">Led a 4-person consulting team for an Irish wearable posture correction device recognised on TIME's 200 Best Inventions of 2024. Designed and administered a 156-response Qualtrics survey, conducted qualitative interviews, and delivered strategic recommendations.</p>
-      <div class="feat-pills">
-        <span class="fpill">Market Research</span>
-        <span class="fpill">Survey Design</span>
-        <span class="fpill">Qualtrics</span>
-        <span class="fpill">Strategic Analysis</span>
-        <span class="fpill">Stakeholder Deliverables</span>
-      </div>
-    </div>
-
-    <div class="stat-grid">
-      <div class="stat-box">
-        <div class="stat-n g">20+</div>
-        <div class="stat-d">Client engagements delivered</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n">4+</div>
-        <div class="stat-d">Years in CRM &amp; BA</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n">6+</div>
-        <div class="stat-d">Full-cycle CRM implementations</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n g">8</div>
-        <div class="stat-d">Certifications earned in 2026</div>
+        <div class="loop" id="loop" aria-hidden="true"><span>Defect found, back to build</span></div>
+        <div class="token" id="token" aria-hidden="true"></div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
-<!-- Stats strip -->
-<div class="strip">
-  <div class="strip-item">
-    <div class="strip-n">4<span>+</span></div>
-    <div class="strip-d">Years in CRM &amp; Business Analysis</div>
-  </div>
-  <div class="strip-item">
-    <div class="strip-n">20<span>+</span></div>
-    <div class="strip-d">Client engagements delivered</div>
-  </div>
-  <div class="strip-item">
-    <div class="strip-n">6<span>+</span></div>
-    <div class="strip-d">Full-cycle CRM implementations</div>
-  </div>
-  <div class="strip-item">
-    <div class="strip-n">156</div>
-    <div class="strip-d">Survey responses — BackAware Belt project</div>
-  </div>
-</div>
-
-<!-- Experience -->
-<div id="work">
-  <div class="wrap">
-    <div class="sh">
-      <h2 class="sh-title">Work experience</h2>
-      <span class="sh-aside">3 roles · 2020 – 2025</span>
+<!-- Numbers -->
+<section class="sec" style="padding-top:40px">
+  <div class="container">
+    <div class="nums">
+      <div class="num rv"><b class="count" data-to="90" data-suf="k+">90k+</b><span>records cleansed and migrated into one CRM</span></div>
+      <div class="num rv" style="--d:.08s"><b class="count" data-to="14" data-suf="+">14+</b><span>clients delivered for across India and the US</span></div>
+      <div class="num rv" style="--d:.16s"><b class="count" data-to="6" data-suf="+">6+</b><span>full-cycle CRM implementations for US clients</span></div>
+      <div class="num rv" style="--d:.24s"><b class="count" data-to="60" data-suf="+">60+</b><span>sales reps trained across 4+ regions</span></div>
+      <div class="num rv" style="--d:.32s"><b class="count" data-to="25" data-suf="%">25%</b><span>less rework after I introduced written sign-off</span></div>
     </div>
-    <div class="exp-list">
+    <p class="mq-cap rv">Platforms and integrations I have shipped with</p>
+  </div>
+  <div class="mq" aria-label="Platforms and integrations">
+    <div class="mq-track">
+      <span class="mq-item">Zoho CRM</span><span class="mq-item">Deluge</span><span class="mq-item">WhatsApp Business API</span><span class="mq-item">Twilio</span><span class="mq-item">Razorpay</span><span class="mq-item">Power BI</span><span class="mq-item">Power Automate</span><span class="mq-item">SQL</span><span class="mq-item">Oracle ERP</span><span class="mq-item">AWS EC2</span><span class="mq-item">Zoho Creator</span><span class="mq-item">Zoho Desk</span><span class="mq-item">Zoho Books</span><span class="mq-item">Jira</span><span class="mq-item">Tableau</span><span class="mq-item">Python</span>
+      <span class="mq-item" aria-hidden="true">Zoho CRM</span><span class="mq-item" aria-hidden="true">Deluge</span><span class="mq-item" aria-hidden="true">WhatsApp Business API</span><span class="mq-item" aria-hidden="true">Twilio</span><span class="mq-item" aria-hidden="true">Razorpay</span><span class="mq-item" aria-hidden="true">Power BI</span><span class="mq-item" aria-hidden="true">Power Automate</span><span class="mq-item" aria-hidden="true">SQL</span><span class="mq-item" aria-hidden="true">Oracle ERP</span><span class="mq-item" aria-hidden="true">AWS EC2</span><span class="mq-item" aria-hidden="true">Zoho Creator</span><span class="mq-item" aria-hidden="true">Zoho Desk</span><span class="mq-item" aria-hidden="true">Zoho Books</span><span class="mq-item" aria-hidden="true">Jira</span><span class="mq-item" aria-hidden="true">Tableau</span><span class="mq-item" aria-hidden="true">Python</span>
+    </div>
+  </div>
+</section>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-co-abbr g">ES</div>
-          <p class="exp-period">Aug 2024 – Aug 2025</p>
-          <p class="exp-co">Eventus Security</p>
-          <p class="exp-where">India · 500+ employees</p>
-        </div>
-        <div>
-          <p class="exp-role">Zoho Developer</p>
-          <p class="exp-role-sub">Business Analyst &amp; Systems Lead</p>
-          <ul class="exp-bul">
-            <li>Architected and administered a full <strong>Zoho One ecosystem</strong> deployment — Zoho CRM, People, Projects, and Desk — in a unified multi-department environment.</li>
-            <li>Built custom <strong>Deluge scripts</strong> to enable automated HR onboarding workflows and client delivery tracking not supported natively.</li>
-            <li>Redesigned <strong>5+ core business workflows</strong> using BPMN process mapping, achieving a measurable <strong>10% efficiency gain</strong>.</li>
-            <li>Identified and mitigated <strong>3 critical implementation risks</strong> through proactive requirements validation and UAT coordination.</li>
-            <li>Created SOPs, flow diagrams, and handover documentation adopted across <strong>3 internal departments</strong>.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="etag">Zoho One</span><span class="etag">Deluge</span><span class="etag">BPMN</span><span class="etag">UAT</span><span class="etag">SaaS Admin</span>
+<!-- Work -->
+<section class="sec sec-white" id="work">
+  <div class="container">
+    <div class="sec-head rv">
+      <h2 class="sec-title">Where I have done the work</h2>
+      <p class="sec-lead">Three roles, one pattern: understand the business, write it down, build it, test it with real users, then hand it over properly.</p>
+    </div>
+
+    <div class="xp rv">
+      <div class="xp-tabs" role="tablist" aria-label="Employers">
+        <button class="xp-tab on" role="tab" aria-selected="true"><strong>Eventus Security</strong><span>2024 to 2025</span></button>
+        <button class="xp-tab" role="tab" aria-selected="false"><strong>WhiteGlobal LLC</strong><span>2022 to 2024</span></button>
+        <button class="xp-tab" role="tab" aria-selected="false"><strong>Value Score</strong><span>2020 to 2022</span></button>
+        <span class="xp-ind" aria-hidden="true"></span>
+      </div>
+
+      <div class="xp-panels">
+        <article class="xp-panel on" role="tabpanel">
+          <h3 class="xp-role">Zoho Developer (Business Analyst and Systems Lead)</h3>
+          <div class="xp-meta">
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Eventus Security Pvt. Ltd</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Mumbai, India</span>
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Aug 2024 to Aug 2025</span>
           </div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-co-abbr r">WG</div>
-          <p class="exp-period">Dec 2022 – Aug 2024</p>
-          <p class="exp-co">White Global LLC</p>
-          <p class="exp-where">Atlanta, USA · Remote</p>
-        </div>
-        <div>
-          <p class="exp-role">Zoho Expert</p>
-          <p class="exp-role-sub">Business Analyst &amp; Implementation Lead</p>
-          <ul class="exp-bul">
-            <li>Recognised SME for Zoho CRM Plus and Zoho One, delivering solutions across retail, professional services, and logistics.</li>
-            <li>Led <strong>6+ full-cycle CRM implementations</strong> from BRD/FRD creation through configuration, custom function development, UAT, and go-live.</li>
-            <li>Built complex Deluge automations: <strong>lead scoring engines, multi-stage approval workflows, and cross-module data sync</strong>.</li>
-            <li>Integrated Zoho CRM with <strong>5+ external platforms</strong> via REST APIs and Zoho Flow.</li>
-            <li>Trained and mentored <strong>4 junior consultants</strong>, reducing team rework by an estimated <strong>25%</strong>.</li>
+          <p class="xp-context">Sole analyst and developer across HR, operations and client delivery at a 500+ employee firm.</p>
+          <ul class="xp-list">
+            <li>Introduced a change process where every request moved from requirements to a <strong>tested proof of concept and manager sign-off</strong>, with a feedback round before the full build.</li>
+            <li>Redesigned <strong>5+ core workflows</strong> with BPMN process mapping and gap analysis, and coded automations that removed manual status checks and field entry, cutting steps by <strong>10%</strong>.</li>
+            <li>Ran monthly waterfall releases with structured UAT, catching <strong>3 critical defects</strong> before production.</li>
+            <li>Ran an HR software capability gap analysis against Zoho People and owned functional design across CRM, HR, project and service desk workflows.</li>
+            <li>Built SQL-prepared <strong>Power BI reports</strong> for data Zoho Analytics could not produce, and wrote SOPs adopted across 3 departments.</li>
           </ul>
-          <div class="exp-tags">
-            <span class="etag">Zoho CRM Plus</span><span class="etag">Deluge</span><span class="etag">REST API</span><span class="etag">Zoho Flow</span><span class="etag">BRD/FRD</span>
-          </div>
-        </div>
-      </div>
+          <div class="chips"><span class="chip key">Zoho One</span><span class="chip">Zoho People</span><span class="chip">BPMN</span><span class="chip">UAT</span><span class="chip">Power BI</span><span class="chip">SQL</span></div>
+        </article>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-co-abbr">VS</div>
-          <p class="exp-period">Oct 2020 – Dec 2022</p>
-          <p class="exp-co">Value Score Business Solutions</p>
-          <p class="exp-where">India</p>
-        </div>
-        <div>
-          <p class="exp-role">Consultant</p>
-          <p class="exp-role-sub">Technical Lead &amp; Project Manager</p>
-          <ul class="exp-bul">
-            <li>Led a cross-functional team of <strong>10+ technical staff</strong> across multiple concurrent client projects.</li>
-            <li>Managed delivery for <strong>14+ clients</strong> across IT consulting and SaaS implementation engagements.</li>
-            <li>Executed <strong>3 major IT modernisation initiatives</strong>, migrating legacy systems to cloud-based platforms including Zoho ecosystem deployments.</li>
-            <li>Integrated <strong>8+ third-party applications</strong> via APIs, enabling cross-platform data flow and reducing manual effort.</li>
+        <article class="xp-panel" role="tabpanel">
+          <h3 class="xp-role">CRM Expert (Business Analyst and Implementation Lead)</h3>
+          <div class="xp-meta">
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>WhiteGlobal LLC</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Atlanta, Georgia, USA (remote)</span>
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Dec 2022 to Aug 2024</span>
+          </div>
+          <p class="xp-context">Analyst and developer on 6+ full-cycle CRM implementations for US clients.</p>
+          <ul class="xp-list">
+            <li>Replaced Excel-based sales tracking with <strong>automated follow-ups, round-robin lead assignment</strong> and reporting, reducing missed leads and manual data entry.</li>
+            <li>Wrote field-level <strong>data dictionaries, source-to-target mappings</strong> and cross-module sync logic that prevented data loss in migrations; reconciled data with SQL and automated corrections in Power Automate.</li>
+            <li>Built <strong>5+ REST API and webhook integrations</strong>, including a WhatsApp CRM integration so reps could message leads from inside the CRM, plus Twilio, Razorpay and CRM-to-accounting sync.</li>
+            <li>Managed <strong>6 concurrent client accounts</strong> within SLA while mentoring 4+ consultants.</li>
           </ul>
-          <div class="exp-tags">
-            <span class="etag">Project Management</span><span class="etag">API Integration</span><span class="etag">Team Lead</span><span class="etag">Client Delivery</span>
-          </div>
-        </div>
-      </div>
+          <div class="chips"><span class="chip key">Zoho CRM</span><span class="chip">Blueprint</span><span class="chip">REST APIs</span><span class="chip">Webhooks</span><span class="chip">WhatsApp Business API</span><span class="chip">Power Automate</span></div>
+        </article>
 
+        <article class="xp-panel" role="tabpanel">
+          <h3 class="xp-role">Technical Consultant (Technical Lead and Project Manager)</h3>
+          <div class="xp-meta">
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Value Score Business Solutions</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Mumbai, India</span>
+            <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Oct 2020 to Dec 2022</span>
+          </div>
+          <p class="xp-context">Led and mentored 10+ technical staff across a 14+ client portfolio.</p>
+          <ul class="xp-list">
+            <li>Led an <strong>Oracle ERP to Zoho migration</strong>, defining the target design through capability gap analysis and running Scrum delivery with sprint planning, Jira, stand-ups and weekly releases.</li>
+            <li>Consolidated help desk, chatbot, website and legacy Excel data into one CRM, cleansing and migrating <strong>90k+ records</strong> for a single customer view with fewer duplicates and faster reporting.</li>
+            <li>Scoped <strong>8+ third-party API integrations</strong> and delivered 3 major IT modernisation initiatives.</li>
+            <li>Trained <strong>60+ sales reps</strong> across 4+ regions.</li>
+          </ul>
+          <div class="chips"><span class="chip key">Data migration</span><span class="chip">Oracle ERP</span><span class="chip">Scrum</span><span class="chip">Jira</span><span class="chip">AWS EC2</span></div>
+        </article>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Case notes -->
+<section class="sec" id="cases">
+  <div class="container">
+    <div class="sec-head rv">
+      <h2 class="sec-title">Problems I was brought in to fix</h2>
+      <p class="sec-lead">Short notes on real issues from past projects, what was going wrong, and what I changed.</p>
+    </div>
+    <div class="cases">
+      <article class="case rv">
+        <p class="case-where">Value Score</p>
+        <div><span class="case-tag p">Problem</span><h3>A lead sync broke every 50 leads</h3><p>API authentication on an AWS EC2 cron job kept failing, and duplicate leads stalled the sync.</p></div>
+        <div class="case-link" aria-hidden="true"></div>
+        <div class="case-fix"><span class="case-tag f">Fix</span><p>Gave every lead a unique identifier, which stopped duplicates from stalling the sync.</p></div>
+      </article>
+      <article class="case rv">
+        <p class="case-where">Eventus Security</p>
+        <div><span class="case-tag p">Problem</span><h3>Forms could be submitted whatever the user selected</h3><p>A validation loophole let users send forms regardless of their selections.</p></div>
+        <div class="case-link" aria-hidden="true"></div>
+        <div class="case-fix"><span class="case-tag f">Fix</span><p>Caught in structured UAT before production, one of 3 critical defects found through monthly release testing.</p></div>
+      </article>
+      <article class="case rv">
+        <p class="case-where">WhiteGlobal</p>
+        <div><span class="case-tag p">Problem</span><h3>Reps could move a deal to any stage they wanted</h3><p>Nothing stopped reps from skipping or jumping between pipeline stages.</p></div>
+        <div class="case-link" aria-hidden="true"></div>
+        <div class="case-fix"><span class="case-tag f">Fix</span><p>Enforced the pipeline with Zoho Blueprint and role-based access control, so deals follow the defined stages in order.</p></div>
+      </article>
+      <article class="case rv">
+        <p class="case-where">WhiteGlobal</p>
+        <div><span class="case-tag p">Problem</span><h3>Scope kept changing after the build started</h3><p>Late requests meant work was rebuilt, and clients could break their own setup through misconfiguration.</p></div>
+        <div class="case-link" aria-hidden="true"></div>
+        <div class="case-fix"><span class="case-tag f">Fix</span><p>Introduced written client sign-off on requirements before build, with later changes billed as change requests. Rework dropped by about 25%.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- Projects -->
-<div id="projects" class="wrap-alt">
-  <div class="wrap">
-    <div class="sh">
-      <h2 class="sh-title">Academic projects</h2>
-      <span class="sh-aside">MSc Business (Management) · DCU 2026</span>
+<section class="sec sec-white" id="projects">
+  <div class="container">
+    <div class="sec-head rv">
+      <h2 class="sec-title">Projects from my MSc at DCU</h2>
     </div>
-    <div class="proj-grid">
-
-      <div class="proj-card feat">
-        <div class="proj-flag amber">🏆 TIME Best Inventions 2024</div>
-        <p class="proj-title">BackAware Belt — Applied Consultancy</p>
-        <p class="proj-client">Irish wearable posture correction device · Feb – Jul 2026</p>
-        <ul class="proj-bul">
-          <li>Led a <strong>4-person consulting team</strong> under academic supervision for an internationally recognised Irish product.</li>
-          <li>Designed and administered a <strong>156-response Qualtrics survey</strong> alongside qualitative interviews to assess market fit and customer pain points.</li>
-          <li>Synthesised findings into a strategic recommendations report, market research report, recommendations deck, and interview materials — all handed over as independent client deliverables.</li>
-          <li>Managed team timelines, deliverable quality, and stakeholder communication throughout the engagement.</li>
-        </ul>
-        <div class="proj-stack">
-          <span class="fpill">Qualtrics</span><span class="fpill">Market Research</span><span class="fpill">Survey Design</span><span class="fpill">Qualitative Research</span><span class="fpill">Strategic Analysis</span><span class="fpill">Project Management</span>
+    <div class="proj">
+      <article class="proj-a rv">
+        <div class="proj-big"><span class="count" data-to="156">156</span></div>
+        <p class="proj-big-cap">survey responses collected for the client</p>
+        <h3>BackAware Belt consultancy</h3>
+        <p class="proj-when">Feb 2026 to Aug 2026</p>
+        <p>Led a 4-person team on an applied consultancy project for an Irish wearable technology company. Designed a Qualtrics survey and ran qualitative research. The client now uses the findings internally to decide where and how to reach customers.</p>
+        <div class="chips"><span class="chip">Team lead</span><span class="chip">Qualtrics</span><span class="chip">Survey design</span><span class="chip">Qualitative research</span></div>
+      </article>
+      <article class="proj-b rv" style="--d:.1s">
+        <div class="bars" aria-hidden="true">
+          <i style="--h:38%;--d:.05s"></i><i style="--h:52%;--d:.1s"></i><i style="--h:44%;--d:.15s"></i><i style="--h:63%;--d:.2s"></i><i style="--h:81%;--d:.25s"></i><i style="--h:58%;--d:.3s"></i><i style="--h:70%;--d:.35s"></i><i style="--h:95%;--d:.4s"></i><i style="--h:66%;--d:.45s"></i>
         </div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-flag green">Data Analysis Report</div>
-        <p class="proj-title">UNICEF Sanitation &amp; Maternal Health</p>
-        <p class="proj-client">Global data analysis · Jan – Apr 2026</p>
-        <ul class="proj-bul">
-          <li>Built an analytical report examining global sanitation access and maternal health indicators using Python.</li>
-          <li>Produced <strong>choropleth maps, time series analysis, and scatter plots</strong> with custom theming using Polars, Plotnine, and Geopandas.</li>
-          <li>Delivered as a reproducible <strong>Quarto report</strong>.</li>
-        </ul>
-        <div class="proj-stack">
-          <span class="fpill">Python</span><span class="fpill">Polars</span><span class="fpill">Plotnine</span><span class="fpill">Geopandas</span><span class="fpill">Quarto</span><span class="fpill">Data Visualisation</span>
-        </div>
-      </div>
-
+        <h3>UNICEF data analysis</h3>
+        <p class="proj-when">MSc coursework, Feb 2026 to Mar 2026</p>
+        <p>Analysed global sanitation and maternal health data in Python (Polars, Plotnine, GeoPandas) and Tableau, and delivered the findings as a Quarto report.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Polars</span><span class="chip">GeoPandas</span><span class="chip">Tableau</span><span class="chip">Quarto</span></div>
+      </article>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Skills -->
-<div id="skills">
-  <div class="wrap">
-    <div class="sh">
-      <h2 class="sh-title">Skills</h2>
+<section class="sec" id="skills">
+  <div class="container">
+    <div class="sec-head rv">
+      <h2 class="sec-title">What I work with</h2>
     </div>
-    <div class="skill-rows">
-      <div class="skill-row">
-        <div class="skill-cat">CRM &amp; Development</div>
-        <div class="skill-tags">
-          <span class="stag hi">Zoho CRM</span><span class="stag hi">Zoho One</span><span class="stag">Zoho CRM Plus</span><span class="stag">Deluge Scripting</span><span class="stag">REST API Integrations</span><span class="stag">Zoho Flow</span><span class="stag">Zoho Creator</span><span class="stag">Zoho Analytics</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-cat">Business Analysis</div>
-        <div class="skill-tags">
-          <span class="stag">Requirements Elicitation</span><span class="stag">BRD / FRD Creation</span><span class="stag">Process Mapping (BPMN)</span><span class="stag">User Stories</span><span class="stag">UAT Planning &amp; Execution</span><span class="stag">Gap Analysis</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-cat">Data &amp; Analytics</div>
-        <div class="skill-tags">
-          <span class="stag">SQL</span><span class="stag">Python (Pandas, Polars)</span><span class="stag">Plotnine</span><span class="stag">Geopandas</span><span class="stag">Power BI</span><span class="stag">Advanced Excel</span><span class="stag">Quarto</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-cat">Project Management</div>
-        <div class="skill-tags">
-          <span class="stag">Stakeholder Management</span><span class="stag">Agile / Scrum</span><span class="stag">Sprint Coordination</span><span class="stag">Risk Identification</span><span class="stag">Market Research</span><span class="stag">Survey Design</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-cat">Tools</div>
-        <div class="skill-tags">
-          <span class="stag">Jira</span><span class="stag">Confluence</span><span class="stag">Lucidchart</span><span class="stag">Draw.io</span><span class="stag">Qualtrics</span><span class="stag">MS Office Suite</span>
-        </div>
-      </div>
+    <div class="skills">
+      <div class="sk-row rv"><h3>Business analysis</h3><div class="chips"><span class="chip key">Requirements elicitation</span><span class="chip">Requirements engineering</span><span class="chip">Functional specifications</span><span class="chip key">BRD/FRD</span><span class="chip">User stories</span><span class="chip">Acceptance criteria</span><span class="chip key">BPMN</span><span class="chip">Gap analysis</span><span class="chip">Process improvement</span><span class="chip">UAT</span></div></div>
+      <div class="sk-row rv"><h3>Data and integration</h3><div class="chips"><span class="chip key">SQL</span><span class="chip">Data modelling</span><span class="chip">Data dictionaries</span><span class="chip">Source-to-target mapping</span><span class="chip">Data reconciliation</span><span class="chip key">REST APIs</span><span class="chip">Webhooks</span><span class="chip">Twilio</span><span class="chip">WhatsApp Business API</span><span class="chip">Razorpay</span></div></div>
+      <div class="sk-row rv"><h3>Analytics</h3><div class="chips"><span class="chip key">Power BI</span><span class="chip">DAX</span><span class="chip">Advanced Excel</span><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Polars</span><span class="chip">Plotnine</span><span class="chip">GeoPandas</span><span class="chip">Tableau</span></div></div>
+      <div class="sk-row rv"><h3>Delivery</h3><div class="chips"><span class="chip key">Stakeholder management</span><span class="chip">Agile</span><span class="chip">Scrum</span><span class="chip">Waterfall</span><span class="chip">Jira</span><span class="chip">Sprint planning</span><span class="chip">Backlog management</span><span class="chip">Change management</span></div></div>
+      <div class="sk-row rv"><h3>Platforms and systems</h3><div class="chips"><span class="chip key">Zoho CRM (Blueprint, CommandCenter)</span><span class="chip">Zoho Creator</span><span class="chip">Zoho Desk</span><span class="chip">Zoho Books</span><span class="chip">Zoho Analytics</span><span class="chip key">Deluge</span><span class="chip">Power Automate</span><span class="chip">Oracle ERP</span><span class="chip">AWS EC2</span></div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Certifications -->
-<div id="certifications" class="wrap-alt">
-  <div class="wrap">
-    <div class="sh">
-      <h2 class="sh-title">Certifications</h2>
-      <span class="sh-aside">8 completed · 1 in progress · all 2026</span>
+<!-- Education and certifications -->
+<section class="sec sec-white">
+  <div class="container two">
+    <div class="rv">
+      <h2 class="list-title">Education</h2>
+      <div class="li-row"><div><strong>Masters, Business (Management)</strong><small>Dublin City University, Dublin</small></div><span class="li-right">Sep 2025 to Aug 2026</span></div>
+      <div class="li-row"><div><strong>Bachelors, Information Technology</strong><small>Amity University, Mumbai</small></div><span class="li-right">Jul 2017 to Aug 2020</span></div>
     </div>
-    <div class="cert-grid">
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Advanced Excel</p>
-          <p class="cert-from">Kubicle · Chartered Accountants Ireland · 9 CPD credits</p>
-        </div>
-        <span class="cbadge cpd">CPD</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Data Visualization &amp; Presentation</p>
-          <p class="cert-from">Kubicle · Chartered Accountants Ireland · 5.5 CPD credits</p>
-        </div>
-        <span class="cbadge cpd">CPD</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Modern Project Management in Microsoft 365</p>
-          <p class="cert-from">LinkedIn Learning · PMI Accredited · 2 PDUs</p>
-        </div>
-        <span class="cbadge pmi">PMI</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Consulting Foundations: Client Management &amp; Relationships</p>
-          <p class="cert-from">LinkedIn Learning · NASBA CPE · 1.4 credits</p>
-        </div>
-        <span class="cbadge pmi">NASBA</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Teamwork Foundations</p>
-          <p class="cert-from">LinkedIn Learning · NASBA &amp; PMI Accredited</p>
-        </div>
-        <span class="cbadge pmi">PMI</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">How to Think Like a Consultant</p>
-          <p class="cert-from">LinkedIn Learning</p>
-        </div>
-        <span class="cbadge ll">LinkedIn</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">How to Own a Room</p>
-          <p class="cert-from">LinkedIn Learning</p>
-        </div>
-        <span class="cbadge ll">LinkedIn</span>
-      </div>
-      <div class="cert-row">
-        <div>
-          <p class="cert-name">Business Ethics: An Introduction for Business Leaders</p>
-          <p class="cert-from">Dublin City University · FutureLearn</p>
-        </div>
-        <span class="cbadge dcu">DCU</span>
-      </div>
-      <div class="cert-row cert-ip">
-        <div>
-          <p class="cert-name">Microsoft Dynamics 365 CRM</p>
-          <p class="cert-from">Microsoft Learn · Self-directed study · In progress 2026</p>
-        </div>
-        <span class="cbadge ip">In Progress</span>
-      </div>
+    <div class="rv" style="--d:.1s">
+      <h2 class="list-title">Certifications</h2>
+      <div class="li-row"><div><strong>Modern Project Management in Microsoft 365</strong><small>LinkedIn Learning</small></div></div>
+      <div class="li-row"><div><strong>Data Visualization and Presentation</strong><small>Kubicle</small></div></div>
+      <div class="li-row"><div><strong>Advanced Excel</strong><small>Kubicle</small></div></div>
+      <div class="li-row"><div><strong>Power Automate, Power Platform and Dynamics 365 CRM</strong><small>Microsoft Learn</small></div><span class="badge-ip">In progress</span></div>
     </div>
   </div>
-</div>
-
-<!-- Education -->
-<div>
-  <div class="wrap">
-    <div class="sh">
-      <h2 class="sh-title">Education</h2>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <span class="edu-tag cur">Current</span>
-        <p class="edu-deg">MSc Business (Management)</p>
-        <p class="edu-uni">Dublin City University · Dublin, Ireland · Sep 2025 – Aug 2026</p>
-        <p class="edu-note">Focus areas: strategy, organisational management, data analytics (Python, SQL), leadership, and applied consultancy.</p>
-      </div>
-      <div class="edu-card">
-        <span class="edu-tag done">Completed</span>
-        <p class="edu-deg">BSc Information Technology</p>
-        <p class="edu-uni">Amity University · Mumbai, India · 2017 – 2020</p>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 <!-- Contact -->
-<div id="contact" class="contact-band">
-  <div class="contact-inner">
-    <h2 class="contact-h">Let's work<br><span>together.</span></h2>
-    <p class="contact-sub">Open to Business Analyst, Techno-Functional Consultant, and Project Manager roles in Dublin. Happy to discuss how my CRM and BA background fits your team.</p>
-    <div class="stamp-strip">
-      <span style="font-size:.9rem">🛂</span>
-      <div>
-        <div class="stamp-strip-text">Stamp 1G — Work Authorised in Ireland</div>
-        <span class="stamp-strip-sub">No employer sponsorship required · Q4 2026</span>
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="rv">Hiring a business systems analyst in Dublin?</h2>
+    <p class="contact-lead rv" style="--d:.08s">I am open to Business Analyst, Business Systems Analyst and CRM roles. Email is the fastest way to reach me.</p>
+    <div class="rv" style="--d:.16s">
+      <button class="copy" id="copyBtn" data-email="anmol.shami1@gmail.com"><span class="copy-txt">anmol.shami1@gmail.com</span><span class="copy-state">Copy email</span></button>
+      <div class="contact-row">
+        <a href="mailto:anmol.shami1@gmail.com" class="btn btn-blue">Email me</a>
+        <a href="https://linkedin.com/in/anmol-shami" target="_blank" rel="noopener" class="btn btn-line">LinkedIn</a>
       </div>
-    </div>
-    <div class="contact-links">
-      <a href="mailto:anmol.shami1@gmail.com" class="clink">
-        <span class="clink-icon">✉</span><span class="clink-val">anmol.shami1@gmail.com</span>
-      </a>
-      <a href="https://www.linkedin.com/in/anmol-shami" target="_blank" class="clink">
-        <span class="clink-icon">🔗</span><span class="clink-val">linkedin.com/in/anmol-shami</span>
-      </a>
+      <p class="stamp"><span class="pulse"></span>Stamp 1G holder, eligible for full-time employment in Ireland</p>
     </div>
   </div>
-</div>
+</section>
 
 <footer>
-  <span>© 2026 Anmol Shami</span>
-  <span>Dublin, Ireland 🇮🇪 · <span>Available for Opportunities</span></span>
+  <div class="container"><span>&copy; 2026 Anmol Shami</span><span>Dublin, Ireland</span></div>
 </footer>
 
 <script>
-// Hamburger
-var hb = document.getElementById('hb');
-var mob = document.getElementById('mob');
-var navCta = document.getElementById('navCta');
-var isOpen = false;
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
 
-// Show cta on desktop
-if (window.innerWidth > 900) navCta.style.display = 'inline-flex';
-window.addEventListener('resize', function() {
-  navCta.style.display = window.innerWidth > 900 ? 'inline-flex' : 'none';
-});
+  /* 1. Scroll reveal (runs first so content can never stay hidden) */
+  try {
+    var rv = document.querySelectorAll('.rv');
+    if (!hasIO || reduce) {
+      for (var i = 0; i < rv.length; i++) rv[i].classList.add('in');
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      for (var j = 0; j < rv.length; j++) io.observe(rv[j]);
+    }
+  } catch (err) { root.classList.remove('js'); }
 
-function toggleMob() {
-  isOpen = !isOpen;
-  hb.classList.toggle('open', isOpen);
-  mob.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-}
-function closeMob() {
-  isOpen = false;
-  hb.classList.remove('open');
-  mob.classList.remove('open');
-  document.body.style.overflow = '';
-}
+  /* 2. Count-up numbers */
+  try {
+    if (hasIO && !reduce) {
+      var co = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          co.unobserve(e.target);
+          var el = e.target;
+          var to = parseFloat(el.getAttribute('data-to'));
+          var suf = el.getAttribute('data-suf') || '';
+          var t0 = null, dur = 1500;
+          function step(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            var v = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(to * v) + suf;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.count').forEach(function (c) { co.observe(c); });
+    }
+  } catch (err) {}
 
-// Hover effect on exp items
-document.querySelectorAll('.exp-item').forEach(function(el) {
-  el.addEventListener('mouseenter', function() { el.style.background = '#fafaf9'; });
-  el.addEventListener('mouseleave', function() { el.style.background = ''; });
-});
+  /* 3. Nav state and progress bar */
+  try {
+    var bar = document.getElementById('bar');
+    var nav = document.getElementById('nav');
+    var onScroll = function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (h > 0 ? window.scrollY / h : 0) + ')';
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  } catch (err) {}
+
+  /* 4. Mobile menu */
+  try {
+    var hb = document.getElementById('hb');
+    var mob = document.getElementById('mob');
+    var setMenu = function (open) {
+      hb.classList.toggle('open', open);
+      mob.classList.toggle('open', open);
+      hb.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    hb.addEventListener('click', function () { setMenu(!mob.classList.contains('open')); });
+    mob.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  } catch (err) {}
+
+  /* 5. Experience tabs */
+  try {
+    var tabs = [].slice.call(document.querySelectorAll('.xp-tab'));
+    var panels = [].slice.call(document.querySelectorAll('.xp-panel'));
+    var ind = document.querySelector('.xp-ind');
+    var placeInd = function () {
+      var a = document.querySelector('.xp-tab.on');
+      if (!a || !ind) return;
+      if (window.innerWidth > 860) {
+        ind.style.left = '-1px'; ind.style.width = '3px';
+        ind.style.top = a.offsetTop + 'px'; ind.style.height = a.offsetHeight + 'px';
+      } else {
+        ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px';
+        ind.style.top = (a.offsetTop + a.offsetHeight - 3) + 'px'; ind.style.height = '3px';
+      }
+    };
+    tabs.forEach(function (t, k) {
+      t.addEventListener('click', function () {
+        tabs.forEach(function (x) { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); });
+        panels.forEach(function (p) { p.classList.remove('on'); });
+        t.classList.add('on'); t.setAttribute('aria-selected', 'true');
+        panels[k].classList.add('on');
+        placeInd();
+      });
+    });
+    placeInd();
+    window.addEventListener('resize', placeInd);
+    window.addEventListener('load', placeInd);
+  } catch (err) { root.classList.remove('js'); }
+
+  /* 6. Hero dot-grid spotlight */
+  try {
+    var hero = document.querySelector('.hero');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    }
+  } catch (err) {}
+
+  /* 7. Copy email */
+  try {
+    var cb = document.getElementById('copyBtn');
+    var state = cb.querySelector('.copy-state');
+    cb.addEventListener('click', function () {
+      var em = cb.getAttribute('data-email');
+      var done = function () {
+        cb.classList.add('ok'); state.textContent = 'Copied';
+        setTimeout(function () { cb.classList.remove('ok'); state.textContent = 'Copy email'; }, 2000);
+      };
+      var fallback = function () {
+        var ta = document.createElement('textarea');
+        ta.value = em; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        if (ok) done(); else window.location.href = 'mailto:' + em;
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(em).then(done, fallback);
+      } else { fallback(); }
+    });
+  } catch (err) {}
+
+  /* 8. Process flow: token travels through the project, fails UAT once, loops back, then goes live */
+  try {
+    var wrap = document.getElementById('flowWrap');
+    var token = document.getElementById('token');
+    var loop = document.getElementById('loop');
+    var statusEl = document.getElementById('flowStatus');
+    var gwIn = document.getElementById('gwIn');
+    var node = function (k) { return wrap.querySelector('[data-k="' + k + '"]'); };
+    var center = function (el) { return { x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2 }; };
+
+    var seqFull = [
+      { k: 'start', s: 'A new request comes in' },
+      { k: 'req', s: 'Running the requirements workshop' },
+      { k: 'spec', s: 'Writing the spec and getting written sign-off' },
+      { k: 'build', s: 'Building it with Deluge, APIs and automation' },
+      { k: 'uat', s: 'Testing with the people who will use it' },
+      { k: 'gw', s: 'Defect caught before production', g: 'fail' },
+      { k: 'loopR', s: 'Sending it back to build' },
+      { k: 'loopL', s: 'Sending it back to build' },
+      { k: 'build', s: 'Fixing the defect' },
+      { k: 'uat', s: 'Retesting' },
+      { k: 'gw', s: 'UAT passed', g: 'pass' },
+      { k: 'end', s: 'Live, with SOPs and training handed over' }
+    ];
+    var seqShort = seqFull.filter(function (p) { return p.k !== 'loopR' && p.k !== 'loopL'; });
+
+    var loopY = 0, B = null, G = null, idx = 0, timer = null;
+    var isDesk = function () { return window.innerWidth > 860; };
+
+    var layout = function () {
+      B = center(node('build')); G = center(node('gw'));
+      if (isDesk()) {
+        var bEl = node('build');
+        var top = G.y + 26;
+        var h = 44;
+        loop.style.display = 'block';
+        loop.style.left = B.x + 'px';
+        loop.style.width = (G.x - B.x) + 'px';
+        loop.style.top = top + 'px';
+        loop.style.height = h + 'px';
+        loop.style.setProperty('--ah', (bEl.offsetTop + bEl.offsetHeight - top) + 'px');
+        loopY = top + h;
+      } else {
+        loop.style.display = 'none';
+      }
+    };
+
+    var pointFor = function (p) {
+      if (p.k === 'loopR') return { x: G.x, y: loopY };
+      if (p.k === 'loopL') return { x: B.x, y: loopY };
+      var el = node(p.k), c = center(el);
+      if (!isDesk() && el.classList.contains('task')) c.x = el.offsetLeft + el.offsetWidth - 24;
+      return c;
+    };
+    var moveTo = function (c) {
+      token.style.transform = 'translate(' + (c.x - 9) + 'px,' + (c.y - 9) + 'px)';
+    };
+    var clearStates = function () {
+      wrap.querySelectorAll('.act,.vis,.fail,.pass').forEach(function (n) { n.classList.remove('act', 'vis', 'fail', 'pass'); });
+      gwIn.textContent = '?';
+    };
+    var seq = function () { return isDesk() ? seqFull : seqShort; };
+
+    var tick = function () {
+      var s = seq();
+      if (idx >= s.length) {
+        token.classList.add('jump');
+        clearStates();
+        idx = 0;
+        moveTo(pointFor(s[0]));
+        timer = setTimeout(function () {
+          token.offsetWidth;
+          token.classList.remove('jump');
+          tick();
+        }, 600);
+        return;
+      }
+      var p = s[idx];
+      moveTo(pointFor(p));
+      wrap.querySelectorAll('.act').forEach(function (n) { n.classList.remove('act'); });
+      loop.classList.toggle('act', p.k === 'loopR' || p.k === 'loopL' || (p.k === 'build' && idx > 3));
+      var el = node(p.k);
+      if (el) { el.classList.add('act', 'vis'); }
+      if (p.g === 'fail') { el.classList.remove('pass'); el.classList.add('fail'); gwIn.textContent = '\u2715'; }
+      if (p.g === 'pass') { el.classList.remove('fail'); el.classList.add('pass'); gwIn.textContent = '\u2713'; }
+      statusEl.textContent = p.s;
+      idx++;
+      timer = setTimeout(tick, idx === s.length ? 2600 : 1250);
+    };
+
+    layout();
+    if (reduce) {
+      var last = seqShort[seqShort.length - 1];
+      moveTo(pointFor(last));
+      node('end').classList.add('act');
+      statusEl.textContent = last.s;
+    } else {
+      token.classList.add('jump');
+      moveTo(pointFor(seq()[0]));
+      setTimeout(function () { token.classList.remove('jump'); tick(); }, 1300);
+    }
+
+    var rt = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        layout();
+        clearTimeout(timer);
+        token.classList.add('jump');
+        clearStates();
+        idx = 0;
+        moveTo(pointFor(seq()[0]));
+        if (!reduce) timer = setTimeout(function () { token.classList.remove('jump'); tick(); }, 400);
+      }, 200);
+    });
+    window.addEventListener('load', function () { layout(); });
+  } catch (err) {}
+})();
 </script>
 </body>
 </html>
