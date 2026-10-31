@@ -7,10 +7,13 @@
 <meta name="description" content="Business Systems Analyst in Dublin. CRM implementation, process automation, API integrations and data migration, from requirements to go-live.">
 <meta name="theme-color" content="#000000">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Poppins, self-hosted (SIL Open Font License, see fonts/OFL.txt). Latin subset, so no visitor data goes to Google */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/poppins-500.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/poppins-600.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/poppins-700.woff2) format('woff2')}
 :root{
   --bg:#000000;
   --card:rgba(14,14,16,.74);
@@ -339,7 +342,7 @@ footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:anmol.shami1@gmail.com" class="btn btn-line">Email me <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    <a href="#contact" data-mail class="btn btn-line">Email me <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
     <button class="hb" id="hb" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -350,7 +353,7 @@ footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <a href="#projects">Projects</a>
   <a href="#skills">Skills</a>
   <a href="#contact">Contact</a>
-  <p class="mob-foot">anmol.shami1@gmail.com</p>
+  <p class="mob-foot" data-mail-text></p>
 </div>
 
 <div class="page">
@@ -365,7 +368,7 @@ footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <p>Business Systems Analyst based in Dublin, Ireland.</p>
         <div class="socials">
           <a href="https://linkedin.com/in/anmol-shami" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
-          <a href="mailto:anmol.shami1@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+          <a href="#contact" data-mail aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
           <a href="#contact" aria-label="Contact section"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></a>
         </div>
         <p class="visa"><span class="pulse"></span>Stamp 1G, eligible for full-time work in Ireland</p>
@@ -621,9 +624,10 @@ footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     <div class="card contact rv">
       <h2>Hiring a business systems analyst in Dublin?</h2>
       <p class="contact-lead">I am open to Business Analyst, Business Systems Analyst and CRM roles. Email is the fastest way to reach me.</p>
-      <button class="copy" id="copyBtn" data-email="anmol.shami1@gmail.com"><span class="copy-txt">anmol.shami1@gmail.com</span><span class="copy-state">Copy email</span></button>
+      <button class="copy" id="copyBtn"><span class="copy-txt" data-mail-text>Reveal email address</span><span class="copy-state">Copy email</span></button>
+      <noscript><p class="contact-lead">Turn on JavaScript to see my email address, or message me on LinkedIn.</p></noscript>
       <div class="contact-row">
-        <a href="mailto:anmol.shami1@gmail.com" class="btn btn-accent">Let's talk <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="#contact" data-mail class="btn btn-accent">Let's talk <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         <a href="https://linkedin.com/in/anmol-shami" target="_blank" rel="noopener" class="btn btn-line">LinkedIn</a>
       </div>
       <p class="stamp"><span class="pulse"></span>Stamp 1G holder, eligible for full-time employment in Ireland</p>
@@ -847,12 +851,18 @@ footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     window.addEventListener('load', placeInd);
   } catch (err) { root.classList.remove('js'); }
 
-  /* 7. Copy email */
+  /* 7. Email: stored scrambled so scrapers reading the HTML never see it; mailto is attached on first hover, focus or tap */
   try {
+    var em = atob('==QbvNmLslWYtdGQxkWbhh2cuw2bt5WY'.split('').reverse().join(''));
+    document.querySelectorAll('[data-mail-text]').forEach(function (n) { n.textContent = em; });
+    var arm = function () { this.href = 'mailto:' + em; };
+    document.querySelectorAll('a[data-mail]').forEach(function (a) {
+      ['pointerenter', 'focus', 'touchstart'].forEach(function (ev) { a.addEventListener(ev, arm, { passive: true }); });
+    });
+
     var cb = document.getElementById('copyBtn');
     var state = cb.querySelector('.copy-state');
     cb.addEventListener('click', function () {
-      var em = cb.getAttribute('data-email');
       var done = function () {
         cb.classList.add('ok'); state.textContent = 'Copied';
         setTimeout(function () { cb.classList.remove('ok'); state.textContent = 'Copy email'; }, 2000);
